@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ViaSetup</title>
+    <style>
+        html {
+            font-size: x-large;
+            background-color: gainsboro;
+        }
+
+        .center {
+            text-align: center;
+            margin: 50px auto auto;
+        }
+
+        footer {
+            position: fixed;
+            left: 5px;
+            bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="center">
+    <h1>ViaVersion Plugin Setup Generator</h1>
+    <label>Select your server version
+        <select id="server_version" onchange="getPlugins()">
+            <option value="18">1.8</option>
+            <option value="19">1.9</option>
+            <option value="110">1.10</option>
+            <option value="111">1.11</option>
+            <option value="112">1.12</option>
+            <option value="113">1.13</option>
+            <option value="114">1.14</option>
+            <option value="115">1.15</option>
+            <option value="116">1.16</option>
+        </select>
+    </label>
+    <br>
+    <br>
+    <label onchange="getPlugins()">Check version you want to support<br>
+        <label for="1.7">1.7</label><input type="checkbox" value="17" id="1.7">
+        <label for="1.8">1.8</label><input type="checkbox" value="18" id="1.8">
+        <label for="1.9">1.9</label><input type="checkbox" value="19" id="1.9">
+        <label for="1.10">1.10</label><input type="checkbox" value="110" id="1.10">
+        <label for="1.11">1.11</label><input type="checkbox" value="111" id="1.11">
+        <label for="1.12">1.12</label><input type="checkbox" value="112" id="1.12">
+        <label for="1.13">1.13</label><input type="checkbox" value="113" id="1.13">
+        <label for="1.14">1.14</label><input type="checkbox" value="114" id="1.14">
+        <label for="1.15">1.15</label><input type="checkbox" value="115" id="1.15">
+        <label for="1.16">1.16</label><input type="checkbox" value="116" id="1.16">
+    </label>
+    <h3 style="display: none">You need <span id="out"></span></h3>
+    <p style="font-style: italic">Note: To block versions use <a href="https://via.krusic22.com" target="_blank" rel="noopener">this</a> tool</p>
+</div>
+<footer>Made with &hearts; by Jo0001</footer>
+<script>
+    function getPlugins() {
+        document.getElementsByTagName("h3")[0].style.display = "block";
+        let server_version = parseInt(document.getElementById("server_version").value);
+        let output = "ViaVersion ";
+        let player_versions = [];
+        let selected = document.getElementsByTagName("input");
+        for (let i = 0; i < selected.length; i++) {
+            if (selected[i].checked) {
+                player_versions.push(parseInt(selected[i].value));
+            } else if (parseInt(selected[i].value) === server_version) {
+                selected[i].checked = true;
+            }
+        }
+        for (let i = 0; i < player_versions.length; i++) {
+            if ((player_versions[i] !== 17 && player_versions[i] !== 18) && player_versions[i] < server_version) {
+                output += "ViaBackwards ";
+                break;
+            }
+        }
+        if (player_versions.includes(17) || (player_versions.includes(18) && server_version !== 18)) {
+            output += "ViaRewind ";
+        }
+        document.getElementById("out").innerHTML = output;
+    }
+</script>
+</body>
+</html>
