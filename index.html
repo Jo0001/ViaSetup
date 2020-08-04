@@ -71,7 +71,7 @@
             return it.checked;
         }).map(it => parseInt(it.value));
         let backwards = player_versions.some(it => it < server_version && server_version > 19);
-        let rewind = player_versions.some(it => it < server_version && it < 1.9);
+        let rewind = player_versions.some(it => it < server_version && it < 19);
         document.getElementById("out").innerHTML = "ViaVersion" + (backwards ? " + ViaBackwards" : "") + (rewind ? " + ViaRewind" : "");
     }
 </script>
