@@ -66,7 +66,7 @@
     function getPlugins() {
         document.getElementsByTagName("h3")[0].style.display = "block";
         let server_version = parseInt(document.getElementById("server_version").value);
-        let player_versions = document.getElementsByTagName("input").filter(it => {
+        let player_versions = Array.from(document.getElementsByTagName("input")).filter(it => {
             if (it.value == server_version) it.checked = true;
             return it.checked;
         }).map(it => parseInt(it.value));
