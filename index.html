@@ -66,26 +66,13 @@
     function getPlugins() {
         document.getElementsByTagName("h3")[0].style.display = "block";
         let server_version = parseInt(document.getElementById("server_version").value);
-        let output = "ViaVersion ";
-        let player_versions = [];
-        let selected = document.getElementsByTagName("input");
-        for (let i = 0; i < selected.length; i++) {
-            if (selected[i].checked) {
-                player_versions.push(parseInt(selected[i].value));
-            } else if (parseInt(selected[i].value) === server_version) {
-                selected[i].checked = true;
-            }
-        }
-        for (let i = 0; i < player_versions.length; i++) {
-            if (player_versions[i] < server_version && server_version !== 18) {
-                output += "ViaBackwards ";
-                break;
-            }
-        }
-        if (player_versions.includes(17) || (player_versions.includes(18) && server_version !== 18)) {
-            output += "ViaRewind ";
-        }
-        document.getElementById("out").innerHTML = output;
+        let player_versions = Array.from(document.getElementsByTagName("input")).filter(it => {
+            if (it.value == server_version) it.checked = true;
+            return it.checked;
+        }).map(it => parseInt(it.value));
+        let backwards = player_versions.some(it => it < server_version && server_version > 19);
+        let rewind = player_versions.some(it => it < server_version && it < 19);
+        document.getElementById("out").innerHTML = "ViaVersion" + (backwards ? " + ViaBackwards" : "") + (rewind ? " + ViaRewind" : "");
     }
 </script>
 </body>
