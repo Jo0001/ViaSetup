@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>ViaSetup</title>
+    <link rel="icon" type="image/png" sizes="128x128" href="https://avatars0.githubusercontent.com/u/47455182?s=128">
     <meta property="og:type" content="website"/>
+    <meta property="og:image" content="https://avatars0.githubusercontent.com/u/47455182?s=128">
     <meta property="og:url" content="https://jo0001.github.io/ViaSetup/"/>
-    <meta property="og:site_name" content="ViaSetup"/>
-    <meta property="og:title" content="ViaSetup"/>
+    <meta property="og:site_name" content="Jo0001.github.io"/>
+    <meta property="og:title" content="ViaVersion Plugin Setup Generator"/>
     <meta property="og:description"
-          content="This tool tells you which Via* plugins you need depending on your setup"/>
+          content="This tool tells you which Via* plugins you need depending on your server setup"/>
     <style>
         html {
             font-size: x-large;
@@ -17,7 +19,7 @@
 
         .center {
             text-align: center;
-            margin: 50px auto auto;
+            margin: 25px auto auto;
         }
 
         footer {
@@ -29,7 +31,7 @@
 </head>
 <body>
 <div class="center">
-    <h1>ViaVersion Plugin Setup Generator</h1>
+    <h2>ViaVersion Plugin Setup Generator</h2>
     <label>Select your server version
         <select id="server_version" onchange="getPlugins()">
             <option value="18">1.8</option>
@@ -46,25 +48,25 @@
     <br>
     <br>
     <label onchange="getPlugins()">Check version you want to support<br>
-        <label for="1.7">1.7</label><input type="checkbox" value="17" id="1.7">
-        <label for="1.8">1.8</label><input type="checkbox" value="18" id="1.8">
-        <label for="1.9">1.9</label><input type="checkbox" value="19" id="1.9">
-        <label for="1.10">1.10</label><input type="checkbox" value="110" id="1.10">
-        <label for="1.11">1.11</label><input type="checkbox" value="111" id="1.11">
-        <label for="1.12">1.12</label><input type="checkbox" value="112" id="1.12">
-        <label for="1.13">1.13</label><input type="checkbox" value="113" id="1.13">
-        <label for="1.14">1.14</label><input type="checkbox" value="114" id="1.14">
-        <label for="1.15">1.15</label><input type="checkbox" value="115" id="1.15">
-        <label for="1.16">1.16</label><input type="checkbox" value="116" id="1.16">
+        <input type="checkbox" value="17" id="1.7"> <label for="1.7">1.7</label>
+        <input type="checkbox" value="18" id="1.8"><label for="1.8">1.8</label>
+        <input type="checkbox" value="19" id="1.9"><label for="1.9">1.9</label>
+        <input type="checkbox" value="110" id="1.10"><label for="1.10">1.10</label>
+        <input type="checkbox" value="111" id="1.11"> <label for="1.11">1.11</label>
+        <input type="checkbox" value="112" id="1.12"><label for="1.12">1.12</label>
+        <input type="checkbox" value="113" id="1.13"> <label for="1.13">1.13</label>
+        <input type="checkbox" value="114" id="1.14"><label for="1.14">1.14</label>
+        <input type="checkbox" value="115" id="1.15"> <label for="1.15">1.15</label>
+        <input type="checkbox" value="116" id="1.16"><label for="1.16">1.16</label>
     </label>
-    <h3 style="display: none">You need <span id="out"></span></h3>
+    <p style="display: none; font-weight: bold">You need <code id="out"></code></p>
     <p style="font-style: italic">Note: To block versions use <a href="https://via.krusic22.com" target="_blank"
                                                                  rel="noopener">via.krusic22.com</a></p>
 </div>
 <footer>Made with &hearts; by Jo0001</footer>
 <script>
     function getPlugins() {
-        document.getElementsByTagName("h3")[0].style.display = "block";
+        document.getElementsByTagName("p")[0].style.display = "block";
         let server_version = parseInt(document.getElementById("server_version").value);
         let player_versions = Array.from(document.getElementsByTagName("input")).filter(it => {
             if (it.value == server_version) it.checked = true;
