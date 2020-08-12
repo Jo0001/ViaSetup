@@ -22,6 +22,10 @@
             margin: 25px auto auto;
         }
 
+        .info {
+            font-style: italic
+        }
+
         footer {
             position: fixed;
             left: 5px;
@@ -47,6 +51,10 @@
     </label>
     <br>
     <br>
+    <label for="proxy">Do you want to install Via* on a proxy (Bungee,...)?</label><input type="checkbox" id="proxy"
+                                                                                          onchange="getPlugins()">
+    <br>
+    <br>
     <label onchange="getPlugins()">Check version you want to support<br>
         <input type="checkbox" value="17" id="1.7"> <label for="1.7">1.7</label>
         <input type="checkbox" value="18" id="1.8"><label for="1.8">1.8</label>
@@ -60,8 +68,9 @@
         <input type="checkbox" value="116" id="1.16"><label for="1.16">1.16</label>
     </label>
     <p style="display: none; font-weight: bold">You need <code id="out"></code></p>
-    <p style="font-style: italic">Note: To block versions use <a href="https://via.krusic22.com" target="_blank"
-                                                                 rel="noopener">via.krusic22.com</a></p>
+    <p class="info">Note: Make sure you have Via* only on the proxy OR on all backend servers (recommend setup)</p>
+    <p class="info">Tip: To block versions use <a href="https://via.krusic22.com" target="_blank"
+                                                  rel="noopener">via.krusic22.com</a></p>
 </div>
 <footer>Made with &hearts; by Jo0001</footer>
 <script>
@@ -74,7 +83,8 @@
         }).map(it => parseInt(it.value));
         let backwards = player_versions.some(it => it < server_version && server_version > 19);
         let rewind = player_versions.some(it => it < server_version && it < 19);
-        document.getElementById("out").innerHTML = "ViaVersion" + (backwards ? " + ViaBackwards" : "") + (rewind ? " + ViaRewind" : "");
+        let proxy = document.getElementById("proxy").checked;
+        document.getElementById("out").innerHTML = "ViaVersion" + (backwards ? " + ViaBackwards" : "") + (rewind ? " + ViaRewind" : "") + (rewind && !proxy ? " (+ ViaRewind Legacy Support)" : "");
     }
 </script>
 </body>
