@@ -26,6 +26,15 @@
             font-style: italic
         }
 
+        #output_container {
+            margin: 20px;
+            border: 2px solid green;
+            border-radius: 8px;
+            display: none;
+            padding: 10px;
+            background: lightgray;
+        }
+
         footer {
             position: fixed;
             left: 5px;
@@ -36,46 +45,55 @@
 <body>
 <div class="center">
     <h2>ViaVersion Plugin Setup Generator</h2>
-    <label>Select your server version
-        <select id="server_version" onchange="getPlugins()">
-            <option value="18">1.8</option>
-            <option value="19">1.9</option>
-            <option value="110">1.10</option>
-            <option value="111">1.11</option>
-            <option value="112">1.12</option>
-            <option value="113">1.13</option>
-            <option value="114">1.14</option>
-            <option value="115">1.15</option>
-            <option value="116">1.16</option>
-        </select>
-    </label>
+    <label for="server_version" id="server_version_text">Select your server version</label>
+    <select id="server_version" onchange="getPlugins()">
+        <option value="18">1.8</option>
+        <option value="19">1.9</option>
+        <option value="110">1.10</option>
+        <option value="111">1.11</option>
+        <option value="112">1.12</option>
+        <option value="113">1.13</option>
+        <option value="114">1.14</option>
+        <option value="115">1.15</option>
+        <option value="116">1.16</option>
+    </select>
+    <br> <br>
+    <label for="proxy" id="proxy_text">Do you want to install Via* on a proxy (Bungee,...)?</label><input
+        type="checkbox" id="proxy"
+        onchange="getPlugins()">
+    <br> <br>
+    <label id="versions">Check version you want to support</label><br>
+    <input onchange="getPlugins()" type="checkbox" value="17" id="1.7"> <label for="1.7">1.7</label>
+    <input onchange="getPlugins()" type="checkbox" value="18" id="1.8"><label for="1.8">1.8</label>
+    <input onchange="getPlugins()" type="checkbox" value="19" id="1.9"><label for="1.9">1.9</label>
+    <input onchange="getPlugins()" type="checkbox" value="110" id="1.10"><label for="1.10">1.10</label>
+    <input onchange="getPlugins()" type="checkbox" value="111" id="1.11"> <label for="1.11">1.11</label>
+    <input onchange="getPlugins()" type="checkbox" value="112" id="1.12"><label for="1.12">1.12</label>
+    <input onchange="getPlugins()" type="checkbox" value="113" id="1.13"> <label for="1.13">1.13</label>
+    <input onchange="getPlugins()" type="checkbox" value="114" id="1.14"><label for="1.14">1.14</label>
+    <input onchange="getPlugins()" type="checkbox" value="115" id="1.15"> <label for="1.15">1.15</label>
+    <input onchange="getPlugins()" type="checkbox" value="116" id="1.16"><label for="1.16">1.16</label>
     <br>
-    <br>
-    <label for="proxy">Do you want to install Via* on a proxy (Bungee,...)?</label><input type="checkbox" id="proxy"
-                                                                                          onchange="getPlugins()">
-    <br>
-    <br>
-    <label onchange="getPlugins()">Check version you want to support<br>
-        <input type="checkbox" value="17" id="1.7"> <label for="1.7">1.7</label>
-        <input type="checkbox" value="18" id="1.8"><label for="1.8">1.8</label>
-        <input type="checkbox" value="19" id="1.9"><label for="1.9">1.9</label>
-        <input type="checkbox" value="110" id="1.10"><label for="1.10">1.10</label>
-        <input type="checkbox" value="111" id="1.11"> <label for="1.11">1.11</label>
-        <input type="checkbox" value="112" id="1.12"><label for="1.12">1.12</label>
-        <input type="checkbox" value="113" id="1.13"> <label for="1.13">1.13</label>
-        <input type="checkbox" value="114" id="1.14"><label for="1.14">1.14</label>
-        <input type="checkbox" value="115" id="1.15"> <label for="1.15">1.15</label>
-        <input type="checkbox" value="116" id="1.16"><label for="1.16">1.16</label>
-    </label>
-    <p style="display: none; font-weight: bold">You need <code id="out"></code></p>
-    <p class="info">Note: Make sure you have Via* only on the proxy OR on all backend servers (recommend setup)</p>
-    <p class="info">Tip: To block versions use <a href="https://via.krusic22.com" target="_blank"
-                                                  rel="noopener">via.krusic22.com</a></p>
+    <div id="output_container">
+        <span style="font-weight: bold" id="out_text">You need  </span><code id="out"></code></div>
+    <p class="info" id="note">Note: Make sure you have Via* only on the proxy OR on all backend servers (recommend
+        setup)</p>
+    <p class="info" id="tip">Tip: To block versions use <a href="https://via.krusic22.com" target="_blank"
+                                                           rel="noopener">via.krusic22.com</a></p>
 </div>
 <footer>Made with &hearts; by Jo0001</footer>
 <script>
+    if (navigator.language.includes("de")) {
+        document.getElementById("server_version_text").innerHTML = "W&auml;hle deine Server Version";
+        document.getElementById("proxy_text").innerHTML = "M&ouml;chtest du Via* auf einem Proxy installieren (Bungee,..)?";
+        document.getElementById("versions").innerHTML = "Klicke alle Versionen an, mit denen Spielern beitreten sollen";
+        document.getElementById("out_text").innerHTML = "Du brauchst";
+        document.getElementById("note").innerHTML = "Hinweis: Stelle sicher, dass du Via* nur auf dem Proxy ODER auf allen backend Servern installierst (empfohlen)";
+        document.getElementById("tip").innerHTML = "Tipp: Um Version zu blockieren ben&uuml;tze <a href=\"https://via.krusic22.com\" target=\"_blank\" rel=\"noopener\">via.krusic22.com</a>";
+    }
+
     function getPlugins() {
-        document.getElementsByTagName("p")[0].style.display = "block";
+        document.getElementById("output_container").style.display = "inline-block";
         let server_version = parseInt(document.getElementById("server_version").value);
         let player_versions = Array.from(document.getElementsByTagName("input")).filter(it => {
             if (it.value == server_version) it.checked = true;
@@ -84,7 +102,7 @@
         let backwards = player_versions.some(it => it < server_version && server_version > 19);
         let rewind = player_versions.some(it => it < server_version && it < 19);
         let proxy = document.getElementById("proxy").checked;
-        document.getElementById("out").innerHTML = "ViaVersion" + (backwards ? " + ViaBackwards" : "") + (rewind ? " + ViaRewind" : "") + (rewind && !proxy ? " (+ ViaRewind Legacy Support)" : "");
+        document.getElementById("out").innerHTML = " ViaVersion" + (backwards ? " + ViaBackwards" : "") + (rewind ? " + ViaRewind" : "") + (rewind && !proxy ? " (+ ViaRewind Legacy Support)" : "");
     }
 </script>
 </body>
