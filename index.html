@@ -22,8 +22,16 @@
             margin: 25px auto auto;
         }
 
-        .info {
-            font-style: italic
+        #info_container {
+            text-align: left;
+            font-style: italic;
+            margin: auto;
+            border: 2px solid #ffc300;
+            border-radius: 8px;
+            display: block;
+            padding: 10px 10px 10px 28px;
+            background: lightgray;
+            width: 50%;
         }
 
         #output_container {
@@ -76,10 +84,13 @@
     <br>
     <div id="output_container">
         <span style="font-weight: bold" id="out_text">You need  </span><code id="out"></code></div>
-    <p class="info" id="note">Note: Make sure you have Via* only on the proxy OR on all backend servers (recommend
-        setup)</p>
-    <p class="info" id="tip">Tip: To block versions use <a href="https://via.krusic22.com" target="_blank"
-                                                           rel="noopener">via.krusic22.com</a></p>
+    <ul id="info_container">
+        <li id="note">Make sure you have Via* only on the proxy OR on all backend servers (recommend
+            setup)
+        </li>
+        <li id="tip">To block versions use <a href="https://via.krusic22.com" target="_blank"
+                                                   rel="noopener">via.krusic22.com</a></li>
+    </ul>
 </div>
 <footer>Made with &hearts; by Jo0001</footer>
 <script>
@@ -88,8 +99,8 @@
         document.getElementById("proxy_text").innerHTML = "M&ouml;chtest du Via* auf einem Proxy installieren (Bungee,..)?";
         document.getElementById("versions").innerHTML = "Klicke alle Versionen an, mit denen Spielern beitreten sollen";
         document.getElementById("out_text").innerHTML = "Du brauchst";
-        document.getElementById("note").innerHTML = "Hinweis: Stelle sicher, dass du Via* nur auf dem Proxy ODER auf allen backend Servern installierst (empfohlen)";
-        document.getElementById("tip").innerHTML = "Tipp: Um Version zu blockieren ben&uuml;tze <a href=\"https://via.krusic22.com\" target=\"_blank\" rel=\"noopener\">via.krusic22.com</a>";
+        document.getElementById("note").innerHTML = "Stelle sicher, dass du Via* nur auf dem Proxy ODER auf allen backend Servern installierst (empfohlenes Setup)";
+        document.getElementById("tip").innerHTML = "Um Version zu blockieren ben&uuml;tze <a href=\"https://via.krusic22.com\" target=\"_blank\" rel=\"noopener\">via.krusic22.com</a>";
     }
 
     function getPlugins() {
