@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>ViaSetup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" sizes="128x128" href="https://avatars0.githubusercontent.com/u/47455182?s=128">
+    <meta name="description" content="This tool tells you which Via* plugins you need depending on your server setup">
     <meta property="og:type" content="website"/>
     <meta property="og:image" content="https://avatars0.githubusercontent.com/u/47455182?s=128">
     <meta property="og:url" content="https://jo0001.github.io/ViaSetup/"/>
@@ -31,7 +33,7 @@
             display: block;
             padding: 10px 10px 10px 28px;
             background: lightgray;
-            width: 50%;
+            max-width: 880px;
         }
 
         #output_container {
@@ -89,14 +91,14 @@
             setup)
         </li>
         <li id="tip">To block versions use <a href="https://via.krusic22.com" target="_blank"
-                                                   rel="noopener">via.krusic22.com</a></li>
+                                              rel="noopener">via.krusic22.com</a></li>
     </ul>
 </div>
 <footer id="credits">Made with &hearts; by Jo0001</footer>
 <script>
     let lang = new URLSearchParams(window.location.search).get("lang");
     let langs = ["en", "de", "pt"];
-    
+
     if (!langs.includes(lang)) {
         lang = navigator.language.substring(0, 2);
         if (!langs.includes(lang)) lang = "en";
