@@ -81,7 +81,11 @@
     <label for="proxy" id="proxy_text">Do you want to install Via* on a proxy (Bungee,...)?</label><input
         type="checkbox" id="proxy"
         onchange="getPlugins()">
-    <br> <br>
+    <br><br>
+    <label for="wildcard" id="lblWildcard">All subversions of server version (e.g. 1.16.x)?</label><input
+        onchange="getPlugins()"
+        type="checkbox"
+        id="wildcard"><br><br>
     <label id="versions">Check version you want to support</label><br>
     <input onchange="getPlugins()" type="checkbox" value="17" id="1.7"> <label for="1.7">1.7</label>
     <input onchange="getPlugins()" type="checkbox" value="18" id="1.8"><label for="1.8">1.8</label>
@@ -139,13 +143,14 @@
 
     function getPlugins() {
         let server_version = parseInt(document.getElementById("server_version").value);
+        let wildcard = document.getElementById("wildcard").checked;
         let player_versions = Array.from(document.getElementsByTagName("input")).filter(it => {
             if (it.value == server_version) it.checked = true;
             return it.checked;
         }).map(it => parseInt(it.value)).filter(function (item) {
             return !isNaN(item);
         });
-        if (player_versions.includes(server_version) && player_versions.length === 1) {
+        if (player_versions.includes(server_version) && player_versions.length === 1 && !wildcard) {
             document.getElementById("output_container").style.display = "none";
             document.getElementById("warn").style.display = "inline-block";
             return;
@@ -154,7 +159,7 @@
             document.getElementById("warn").style.display = "none";
         }
         let rewind = player_versions.some(it => it < server_version && it < 19);
-        let backwards = player_versions.some(it => (it < server_version && server_version > 19) || (rewind && server_version >= 19));
+        let backwards = player_versions.some(it => (it < server_version && server_version > 19) || (rewind && server_version >= 19) || (server_version >= 19 && wildcard));
         let proxy = document.getElementById("proxy").checked;
         document.getElementById("out").innerHTML = " ViaVersion" + (backwards ? " + ViaBackwards" : "") + (rewind ? " + ViaRewind" : "") + (rewind && !proxy ? " (+ ViaRewind Legacy Support)" : "");
     }
