@@ -67,15 +67,15 @@
     <h2>ViaVersion Plugin Setup Generator</h2>
     <label for="server_version" id="server_version_text">Select your server version</label>
     <select id="server_version" onchange="getPlugins()">
-        <option value="18">1.8</option>
-        <option value="19">1.9</option>
-        <option value="110">1.10</option>
-        <option value="111">1.11</option>
-        <option value="112">1.12</option>
-        <option value="113">1.13</option>
-        <option value="114">1.14</option>
-        <option value="115">1.15</option>
         <option value="116">1.16</option>
+        <option value="115">1.15</option>
+        <option value="114">1.14</option>
+        <option value="113">1.13</option>
+        <option value="112">1.12</option>
+        <option value="111">1.11</option>
+        <option value="110">1.10</option>
+        <option value="19">1.9</option>
+        <option value="18">1.8</option>
     </select>
     <br> <br>
     <label for="proxy" id="proxy_text">Do you want to install Via* on a proxy (Bungee,...)?</label><input
@@ -125,6 +125,7 @@
     if (lang == "de") {
         document.getElementById("server_version_text").innerHTML = "W&auml;hle deine Server Version";
         document.getElementById("proxy_text").innerHTML = "M&ouml;chtest du Via* auf einem Proxy installieren (Bungee,..)?";
+        document.getElementById("lblWildcard").innerHTML ="Alle Sub-Versionen der Serverversion (z.B. 1.16.x)";
         document.getElementById("versions").innerHTML = "Klicke alle Versionen an, mit denen Spielern beitreten sollen";
         document.getElementById("out_text").innerHTML = "Du brauchst";
         document.getElementById("warn").innerHTML = "Bitte w&auml;hle eine weitere Version aus!";
