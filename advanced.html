@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ViaSetup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="128x128" href="https://avatars0.githubusercontent.com/u/47455182?s=128">
+    <meta name="description" content="This tool tells you which Via* plugins you need depending on your server setup">
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="https://avatars0.githubusercontent.com/u/47455182?s=128">
+    <meta property="og:url" content="https://jo0001.github.io/ViaSetup/"/>
+    <meta property="og:site_name" content="Jo0001.github.io"/>
+    <meta property="og:title" content="ViaVersion Plugin Setup Generator"/>
+    <meta property="og:description"
+          content="This tool tells you which Via* plugins you need depending on your server setup"/>
+    <style>
+        html {
+            font-size: x-large;
+            background-color: #585962;
+            color: whitesmoke;
+        }
+
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+            width: 540px;
+        }
+
+        #info_container {
+            text-align: left;
+            border: 2px solid #ffc300;
+            border-radius: 8px;
+            background: #484848;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        li {
+            padding: 10px;
+        }
+
+        #output_container {
+            border: 2px solid green;
+            border-radius: 8px;
+            background: #484848;
+            display: none;
+            padding: 10px;
+        }
+
+        #warn {
+            display: none;
+            border: 2px solid darkred;
+            border-radius: 8px;
+            background: #ffb2b2;
+            padding: 10px;
+            color: darkred;
+        }
+
+        .container {
+            float: left;
+            padding: 10px;
+            box-sizing: border-box;
+            margin: 10px;
+        }
+
+        footer {
+            position: fixed;
+            left: 5px;
+            bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="center">
+    <h2>ViaVersion Plugin Setup Generator</h2>
+    <label for="server_version" id="server_version_text">Select your server version</label>
+    <select id="server_version" onchange="getPlugins()">
+        <optgroup label="1.16.x">
+            <option value="754">1.16.4 & 1.16.5</option>
+            <option value="753">1.16.3</option>
+            <option value="751">1.16.2</option>
+            <option value="736">1.16.1</option>
+            <option value="735">1.16</option>
+        </optgroup>
+        <optgroup label="1.15.x">
+            <option value="578">1.15.2</option>
+            <option value="575">1.15.1</option>
+            <option value="573">1.15</option>
+        </optgroup>
+        <optgroup label="1.14.x">
+            <option value="498">1.14.4</option>
+            <option value="490">1.14.3</option>
+            <option value="485">1.14.2</option>
+            <option value="480">1.14.1</option>
+            <option value="477">1.14</option>
+        </optgroup>
+        <optgroup label="1.13.x">
+            <option value="404">1.13.2</option>
+            <option value="401">1.13.1</option>
+            <option value="393">1.13</option>
+        </optgroup>
+        <optgroup label="1.12.x">
+            <option value="340">1.12.2</option>
+            <option value="338">1.12.1</option>
+            <option value="335">1.12</option>
+        </optgroup>
+        <optgroup label="1.11.x">
+            <option value="316">1.11.1 & 1.11.2</option>
+            <option value="315">1.11</option>
+        </optgroup>
+        <optgroup label="1.10.x">
+            <option value="210">1.10.x</option>
+        </optgroup>
+        <optgroup label="1.9.x">
+            <option value="110">1.9.3 & 1.9.4</option>
+            <option value="109">1.9.2</option>
+            <option value="108">1.9.1</option>
+            <option value="107">1.9</option>
+        </optgroup>
+        <optgroup label="1.8 Legacy">
+            <option value="47">1.8</option>
+        </optgroup>
+    </select>
+    <br> <br>
+    <label for="proxy" id="proxy_text">Do you want to install Via* on a proxy (Bungee,...)?</label><input
+        type="checkbox" id="proxy"
+        onchange="getPlugins()">
+    <br> <br>
+    <label id="versions">Check version you want to support</label><br>
+    <div class="container">
+        <input onchange="getPlugins()" type="checkbox" value="5" id="5"><label for="5">1.7.x</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="47" id="47"><label for="47">1.8.x</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="107" id="107"><label for="107">1.9</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="108" id="108"><label for="108">1.9.1</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="109" id="109"><label for="109">1.9.2</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="110" id="110"><label for="110">1.9.3 & 1.9.4</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="210" id="210"><label for="210">1.10</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="315" id="315"><label for="315">1.11</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="316" id="316"><label for="316">1.11.1 &
+        1.11.2</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="335" id="335"><label for="335">1.12</label><br>
+    </div>
+    <div class="container">
+        <input onchange="getPlugins()" type="checkbox" value="338" id="338"><label for="338">1.12.1</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="340" id="340"><label for="340">1.12.2</label><br>
+
+        <input onchange="getPlugins()" type="checkbox" value="393" id="393"><label for="393">1.13</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="401" id="401"><label for="401">1.13.1</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="404" id="404"><label for="404">1.13.2</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="477" id="477"><label for="477">1.14</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="480" id="480"><label for="480">1.14.1</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="485" id="485"><label for="485">1.14.2</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="490" id="490"><label for="490">1.14.3</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="498" id="498"><label for="498">1.14.4</label><br>
+    </div>
+    <div class="container">
+        <input onchange="getPlugins()" type="checkbox" value="573" id="573"><label for="573">1.15</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="575" id="575"><label for="575">1.15.1</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="578" id="578"><label for="578">1.15.2</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="735" id="735"><label for="735">1.16</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="736" id="736"><label for="736">1.16.1</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="751" id="751"><label for="751">1.16.2</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="753" id="753"><label for="753">1.16.3</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="754" id="754"><label for="754">1.16.4 & 1.16.5</label><br>
+        <span id="check" onclick="toggleCheck()" style="cursor: pointer;text-decoration: underline;">Check all</span>
+    </div>
+    <br>
+    <div style="clear: both">
+        <div id="output_container">
+            <span style="font-weight: bold" id="out_text">You need  </span><code id="out"></code></div>
+        <div id="warn">Please select at least one additional version!</div>
+        <br>
+        <ul id="info_container">
+            <li id="tip" style="display: none"></li>
+            <li id="note">Make sure you have Via* only on the proxy OR on all backend servers (recommend
+                setup)
+            </li>
+        </ul>
+    </div>
+
+</div>
+<footer id="credits">Made with &hearts; by Jo0001</footer>
+<script>
+    //Language settings
+    let lang = new URLSearchParams(window.location.search).get("lang");
+    let langs = ["en", "de", "pt"];
+    let toggleMessage = ["Check all", "Uncheck all"];
+    let blockMessage = "Paste these numbers to the ViaVersion <code>config.yml</code> under <code>block-protocols: <b>[$output]</b></code>";
+
+    if (!langs.includes(lang)) {
+        lang = navigator.language.substring(0, 2);
+        if (!langs.includes(lang)) lang = "en";
+        history.replaceState(null, null, "?lang=" + lang);
+    }
+
+    document.documentElement.lang = lang;
+
+    if (lang === "de") {
+        document.getElementById("server_version_text").innerHTML = "W&auml;hle deine Server Version";
+        document.getElementById("proxy_text").innerHTML = "M&ouml;chtest du Via* auf einem Proxy installieren (Bungee,..)?";
+        document.getElementById("versions").innerHTML = "Klicke alle Versionen an, mit denen Spielern beitreten sollen";
+        document.getElementById("out_text").innerHTML = "Du brauchst";
+        document.getElementById("warn").innerHTML = "Bitte w&auml;hle eine weitere Version aus!";
+        document.getElementById("note").innerHTML = "Stelle sicher, dass du Via* nur auf dem Proxy ODER auf allen backend Servern installierst (empfohlenes Setup)";
+        blockMessage = "F&uuml;ge folgende Nummern in der ViaVersion <code>config.yml</code> unter <code>block-protocols: <b>[$output]</b></code> ein";
+        toggleMessage = ["Alle w&auml;hlen", "Alle abw&auml;hlen"];
+    } else if (lang === "pt") {
+        document.getElementById("server_version_text").innerHTML = "Selecione a versão do servidor";
+        document.getElementById("proxy_text").innerHTML = "Quer usar os plugins Via* em um proxy (BungeeCord, ...)?";
+        document.getElementById("versions").innerHTML = "Selecione as versões para dar suporte";
+        document.getElementById("out_text").innerHTML = "Você precisa de";
+        document.getElementById("warn").innerHTML = "Selecione uma versão adicional!";
+        document.getElementById("note").innerHTML = "Tenha certeza de que os plugins Via* estão somente no proxy ou nos servidores backend (configuração recomendada)";
+        //blockMessage = "$output";todo portuguese translation
+        //toggleMessage = ["", ""];todo portuguese translation
+        document.getElementById("credits").innerHTML = "Feito com &hearts; por Jo0001"
+    }
+
+    //Plugin generation
+    function getPlugins() {
+        let server_version = parseInt(document.getElementById("server_version").value);
+        let player_versions = Array.from(document.getElementsByTagName("input")).filter(it => {
+            if (it.value == server_version) it.checked = true;
+            return it.checked;
+        }).map(it => parseInt(it.value)).filter(function (item) {
+            return !isNaN(item);
+        });
+        if (player_versions.includes(server_version) && player_versions.length === 1) {
+            document.getElementById("output_container").style.display = "none";
+            document.getElementById("warn").style.display = "inline-block";
+            return;
+        } else {
+            document.getElementById("output_container").style.display = "inline-block";
+            document.getElementById("warn").style.display = "none";
+        }
+        let rewind = player_versions.some(it => it < server_version && it < 107);
+        let backwards = player_versions.some(it => (it < server_version && server_version > 107) || (rewind && server_version >= 107));
+        let proxy = document.getElementById("proxy").checked;
+        document.getElementById("out").innerHTML = " ViaVersion" + (backwards ? " + ViaBackwards" : "") + (rewind ? " + ViaRewind" : "") + (rewind && !proxy ? " (+ ViaRewind Legacy Support)" : "");
+        generateBlockList();
+    }
+
+    function generateBlockList() {
+        let blocked_versions = Array.from(document.getElementsByTagName("input")).filter(it => {
+            return it.checked === false;
+        }).map(it => parseInt(it.value)).filter(function (item) {
+            return !isNaN(item);
+        });
+        if (blocked_versions.length > 0) {
+            document.getElementById("tip").innerHTML = blockMessage.replaceAll("$output", blocked_versions);
+            document.getElementById("tip").style.display = "list-item";
+        } else {
+            document.getElementById("tip").style.display = "none";
+        }
+    }
+
+    let check = false;
+
+    function toggleCheck() {
+        check = !check;
+        setCheckText();
+        let player_versions = Array.from(document.getElementsByTagName("input"));
+        player_versions.shift();
+        player_versions.forEach(it => {
+            it.checked = check;
+        });
+        getPlugins();
+    }
+
+    function setCheckText() {
+        document.getElementById("check").innerHTML = check ? toggleMessage[1] : toggleMessage[0];
+    }
+
+    setCheckText();
+</script>
+</body>
+</html>
