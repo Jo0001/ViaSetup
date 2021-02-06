@@ -125,7 +125,7 @@
     if (lang == "de") {
         document.getElementById("server_version_text").innerHTML = "W&auml;hle deine Server Version";
         document.getElementById("proxy_text").innerHTML = "M&ouml;chtest du Via* auf einem Proxy installieren (Bungee,..)?";
-        document.getElementById("lblWildcard").innerHTML ="Alle Sub-Versionen der Serverversion (z.B. 1.16.x)";
+        document.getElementById("lblWildcard").innerHTML = "Alle Sub-Versionen der Serverversion (z.B. 1.16.x)";
         document.getElementById("versions").innerHTML = "Klicke alle Versionen an, mit denen Spielern beitreten sollen";
         document.getElementById("out_text").innerHTML = "Du brauchst";
         document.getElementById("warn").innerHTML = "Bitte w&auml;hle eine weitere Version aus!";
@@ -160,7 +160,7 @@
             document.getElementById("warn").style.display = "none";
         }
         let rewind = player_versions.some(it => it < server_version && it < 19);
-        let backwards = player_versions.some(it => (it < server_version && server_version > 19) || (rewind && server_version >= 19) || (server_version >= 19 && wildcard));
+        let backwards = player_versions.some(it => (it < server_version && server_version > 19) || (server_version >= 19 && wildcard));
         let proxy = document.getElementById("proxy").checked;
         document.getElementById("out").innerHTML = " ViaVersion" + (backwards ? " + ViaBackwards" : "") + (rewind ? " + ViaRewind" : "") + (rewind && !proxy ? " (+ ViaRewind Legacy Support)" : "");
     }
