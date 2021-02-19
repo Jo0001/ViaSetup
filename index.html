@@ -192,40 +192,45 @@
 <script>
     //Language settings
     let lang = new URLSearchParams(window.location.search).get("lang");
-    let langs = ["en", "de", "pt"];
+    let langs = {
+        "en": () => {},
+        "de": () => {
+            document.getElementById("server_version_text").innerHTML = "W&auml;hle deine Server Version";
+            document.getElementById("proxy_text").innerHTML = "M&ouml;chtest du Via* auf einem Proxy installieren (Bungee,..)?";
+            document.getElementById("versions").innerHTML = "Klicke alle Versionen an, mit denen Spielern beitreten sollen";
+            document.getElementById("out_text").innerHTML = "Du brauchst";
+            document.getElementById("warn").innerHTML = "Bitte w&auml;hle eine weitere Version aus!";
+            document.getElementById("note").innerHTML = "Stelle sicher, dass du Via* nur auf dem Proxy ODER auf allen backend Servern installierst (empfohlenes Setup)";
+            document.getElementById("travertine").innerHTML = "Du brauchst <a href=\"https://papermc.io/downloads#Travertine\" target=\"_blank\" rel=\"noopener\">Travertine</a> als Proxy f&uuml;r 1.7 Support";
+            blockMessage = "F&uuml;ge folgende Nummern in der ViaVersion <code>config.yml</code> unter <code>block-protocols: <b>[$output]</b></code> ein";
+            toggleMessage = ["Alle w&auml;hlen", "Alle abw&auml;hlen"];
+        },
+        "pt": () => {
+            document.getElementById("server_version_text").innerHTML = "Selecione a versão do servidor";
+            document.getElementById("proxy_text").innerHTML = "Quer usar os plugins Via* em um proxy (BungeeCord, ...)?";
+            document.getElementById("versions").innerHTML = "Selecione as versões para dar suporte";
+            document.getElementById("out_text").innerHTML = "Você precisa de";
+            document.getElementById("warn").innerHTML = "Selecione uma versão adicional!";
+            document.getElementById("note").innerHTML = "Tenha certeza de que os plugins Via* estão somente no proxy ou nos servidores backend (configuração recomendada)";
+            blockMessage = "Insira estes números na <code>config.yml</code> do ViaVersion em <code>block-protocols: <b>[$output]</b></code>";
+            toggleMessage = ["Marcar tudo", "Desmarcar tudo"];
+            document.getElementById("travertine").innerHTML = "Você precisará do <a href='https://papermc.io/downloads#Travertine' target='_blank' rel='noopener'>Travertine</a> como proxy para aceitar a versão 1.7";
+            document.getElementById("credits").innerHTML = "Feito com &hearts; por Jo0001";
+        }
+    };
     let toggleMessage = ["Check all", "Uncheck all"];
     let blockMessage = "Paste these numbers to the ViaVersion <code>config.yml</code> under <code>block-protocols: <b>[$output]</b></code>";
 
-    if (!langs.includes(lang)) {
+    let langIds = Object.keys(langs);
+    if (!langIds.includes(lang)) {
         lang = navigator.language.substring(0, 2);
-        if (!langs.includes(lang)) lang = "en";
+        if (!langIds.includes(lang)) lang = "en";
         history.replaceState(null, null, "?lang=" + lang);
     }
 
     document.documentElement.lang = lang;
 
-    if (lang === "de") {
-        document.getElementById("server_version_text").innerHTML = "W&auml;hle deine Server Version";
-        document.getElementById("proxy_text").innerHTML = "M&ouml;chtest du Via* auf einem Proxy installieren (Bungee,..)?";
-        document.getElementById("versions").innerHTML = "Klicke alle Versionen an, mit denen Spielern beitreten sollen";
-        document.getElementById("out_text").innerHTML = "Du brauchst";
-        document.getElementById("warn").innerHTML = "Bitte w&auml;hle eine weitere Version aus!";
-        document.getElementById("note").innerHTML = "Stelle sicher, dass du Via* nur auf dem Proxy ODER auf allen backend Servern installierst (empfohlenes Setup)";
-        document.getElementById("travertine").innerHTML = "Du brauchst <a href=\"https://papermc.io/downloads#Travertine\" target=\"_blank\" rel=\"noopener\">Travertine</a> als Proxy f&uuml;r 1.7 Support";
-        blockMessage = "F&uuml;ge folgende Nummern in der ViaVersion <code>config.yml</code> unter <code>block-protocols: <b>[$output]</b></code> ein";
-        toggleMessage = ["Alle w&auml;hlen", "Alle abw&auml;hlen"];
-    } else if (lang === "pt") {
-        document.getElementById("server_version_text").innerHTML = "Selecione a versão do servidor";
-        document.getElementById("proxy_text").innerHTML = "Quer usar os plugins Via* em um proxy (BungeeCord, ...)?";
-        document.getElementById("versions").innerHTML = "Selecione as versões para dar suporte";
-        document.getElementById("out_text").innerHTML = "Você precisa de";
-        document.getElementById("warn").innerHTML = "Selecione uma versão adicional!";
-        document.getElementById("note").innerHTML = "Tenha certeza de que os plugins Via* estão somente no proxy ou nos servidores backend (configuração recomendada)";
-        blockMessage = "Insira estes números na <code>config.yml</code> do ViaVersion em <code>block-protocols: <b>[$output]</b></code>";
-        toggleMessage = ["Marcar tudo", "Desmarcar tudo"];
-        document.getElementById("travertine").innerHTML = "Você precisará do <a href='https://papermc.io/downloads#Travertine' target='_blank' rel='noopener'>Travertine</a> como proxy para aceitar a versão 1.7";
-        document.getElementById("credits").innerHTML = "Feito com &hearts; por Jo0001";
-    }
+    langs[lang]();
 
     //Plugin generation
     function getPlugins() {
