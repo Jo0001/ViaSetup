@@ -18,12 +18,7 @@
             font-size: x-large;
             background-color: #585962;
             color: whitesmoke;
-        }
-
-        .center {
-            margin-left: auto;
-            margin-right: auto;
-            width: 540px;
+            text-align: center;
         }
 
         #info_container {
@@ -37,6 +32,10 @@
 
         li {
             padding: 10px;
+        }
+
+        .container {
+            text-align: left;
         }
 
         #output_container {
@@ -56,11 +55,9 @@
             color: darkred;
         }
 
-        .container {
-            float: left;
-            padding: 10px;
-            box-sizing: border-box;
-            margin: 10px;
+        #info_container {
+            display: block;
+            word-wrap: break-word;
         }
 
         a {
@@ -68,9 +65,28 @@
         }
 
         footer {
-            position: fixed;
-            left: 5px;
-            bottom: 10px;
+            text-align: left;
+        }
+
+        @media screen and (min-height: 650px) {
+            .center {
+                margin-left: auto;
+                margin-right: auto;
+                width: 540px;
+            }
+
+            .container {
+                float: left;
+                padding: 10px;
+                box-sizing: border-box;
+                margin: 10px;
+            }
+
+            footer {
+                position: fixed;
+                left: 5px;
+                bottom: 10px;
+            }
         }
 
     </style>
@@ -193,7 +209,8 @@
     //Language settings
     let lang = new URLSearchParams(window.location.search).get("lang");
     let langs = {
-        "en": () => {},
+        "en": () => {
+        },
         "de": () => {
             document.getElementById("server_version_text").innerHTML = "W&auml;hle deine Server Version";
             document.getElementById("proxy_text").innerHTML = "M&ouml;chtest du Via* auf einem Proxy installieren (Bungee,..)?";
