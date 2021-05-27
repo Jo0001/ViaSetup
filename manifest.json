@@ -1,0 +1,31 @@
+{
+  "name": "ViaSetup",
+  "short_name": "ViaSetup",
+  "description": "This tool tells you which Via* plugins you need depending on your server setup",
+  "start_url": "/?pwa=1",
+  "display": "standalone",
+  "background_color": "#054d77",
+  "theme_color": "#054d77",
+  "splash_screens": [
+    {
+      "src": "img/256.png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "img/128.png",
+      "sizes": "128x128"
+    }
+  ],
+  "icons": [
+    {
+      "src": "img/256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "img/128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }
+  ]
+}
