@@ -2,7 +2,7 @@
   "name": "ViaSetup",
   "short_name": "ViaSetup",
   "description": "This tool tells you which Via* plugins you need depending on your server setup",
-  "start_url": "/?pwa=1",
+  "start_url": "?pwa=1",
   "display": "standalone",
   "background_color": "#054d77",
   "theme_color": "#054d77",
