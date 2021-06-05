@@ -97,6 +97,9 @@
     <h2>ViaVersion Plugin Setup Generator</h2>
     <label for="server_version" id="server_version_text">Select your server version</label>
     <select id="server_version" onchange="getPlugins()">
+        <optgroup label="Latest">
+            <option value="755">1.17</option>
+        </optgroup>
         <optgroup label="1.16.x">
             <option value="754">1.16.4 & 1.16.5</option>
             <option value="753">1.16.3</option>
@@ -184,6 +187,7 @@
         <input onchange="getPlugins()" type="checkbox" value="751" id="751"><label for="751">1.16.2</label><br>
         <input onchange="getPlugins()" type="checkbox" value="753" id="753"><label for="753">1.16.3</label><br>
         <input onchange="getPlugins()" type="checkbox" value="754" id="754"><label for="754">1.16.4 & 1.16.5</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="755" id="755"><label for="755">1.17</label><br>
         <span id="check" onclick="toggleCheck()" style="cursor: pointer;text-decoration: underline;">Check all</span>
     </div>
     <br>
