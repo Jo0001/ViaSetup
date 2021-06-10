@@ -183,7 +183,7 @@
         </optgroup>
     </select>
     <br> <br>
-    <label for="proxy" id="proxy_text">Do you want to install Via* on a proxy (Bungee,...)?</label><input
+    <label for="proxy" id="proxy_text">Do you want to install Via* on a proxy (Bungee, Velocity,...)?</label><input
         type="checkbox" id="proxy"
         onchange="getPlugins()">
     <br> <br>
@@ -234,8 +234,8 @@
         <br>
         <ul id="info_container">
             <li id="tip" style="display: none"></li>
-            <li id="travertine" style="display: none">You need <a href="https://papermc.io/downloads#Travertine"
-                                                                  target="_blank" rel="noopener">Travertine</a>
+            <li id="velocity" style="display: none">You need <a href="https://velocitypowered.com/"
+                                                                  target="_blank" rel="noopener">Velocity</a>
                 as proxy for 1.7 support
             </li>
             <li id="note">Make sure you have Via* only on the proxy OR on all backend servers (recommend
@@ -254,26 +254,38 @@
         },
         "de": () => {
             document.getElementById("server_version_text").innerHTML = "W&auml;hle deine Server Version";
-            document.getElementById("proxy_text").innerHTML = "M&ouml;chtest du Via* auf einem Proxy installieren (Bungee,..)?";
+            document.getElementById("proxy_text").innerHTML = "M&ouml;chtest du Via* auf einem Proxy installieren (Bungee, Velocity,..)?";
             document.getElementById("versions").innerHTML = "Klicke alle Versionen an, mit denen Spielern beitreten sollen";
             document.getElementById("out_text").innerHTML = "Du brauchst";
             document.getElementById("warn").innerHTML = "Bitte w&auml;hle eine weitere Version aus!";
             document.getElementById("note").innerHTML = "Stelle sicher, dass du Via* nur auf dem Proxy ODER auf allen backend Servern installierst (empfohlenes Setup)";
-            document.getElementById("travertine").innerHTML = "Du brauchst <a href=\"https://papermc.io/downloads#Travertine\" target=\"_blank\" rel=\"noopener\">Travertine</a> als Proxy f&uuml;r 1.7 Support";
+            document.getElementById("velocity").innerHTML = "Du brauchst <a href=\"https://velocitypowered.com/\" target=\"_blank\" rel=\"noopener\">Velocity</a> als Proxy f&uuml;r 1.7 Support";
             blockMessage = "F&uuml;ge folgende Nummern in der ViaVersion <code>config.yml</code> unter <code>block-protocols: <b class='tooltip'><span class='tooltiptext'>Klicke zum kopieren</span>[$output]</b></code> ein";
             toggleMessage = ["Alle w&auml;hlen", "Alle abw&auml;hlen"];
         },
         "pt": () => {
             document.getElementById("server_version_text").innerHTML = "Selecione a versão do servidor";
-            document.getElementById("proxy_text").innerHTML = "Quer usar os plugins Via* em um proxy (BungeeCord, ...)?";
+            document.getElementById("proxy_text").innerHTML = "Quer usar os plugins Via* em um proxy (BungeeCord, Velocity, ...)?";
             document.getElementById("versions").innerHTML = "Selecione as versões para dar suporte";
             document.getElementById("out_text").innerHTML = "Você precisa de";
             document.getElementById("warn").innerHTML = "Selecione uma versão adicional!";
             document.getElementById("note").innerHTML = "Tenha certeza de que os plugins Via* estão somente no proxy ou nos servidores backend (configuração recomendada)";
             blockMessage = "Insira estes números na <code>config.yml</code> do ViaVersion em <code>block-protocols: <b class='tooltip'><span class='tooltiptext'>Click to copy</span>[$output]</b></code>";//todo add translation
             toggleMessage = ["Marcar tudo", "Desmarcar tudo"];
-            document.getElementById("travertine").innerHTML = "Você precisará do <a href='https://papermc.io/downloads#Travertine' target='_blank' rel='noopener'>Travertine</a> como proxy para aceitar a versão 1.7";
+            document.getElementById("velocity").innerHTML = "Você precisará do <a href='https://velocitypowered.com/' target='_blank' rel='noopener'>Velocity</a> como proxy para aceitar a versão 1.7";
             document.getElementById("credits").innerHTML = "Feito com &hearts; por Jo0001";
+        },
+        "fr": () => {
+            document.getElementById("server_version_text").innerHTML = "Sélectionnez votre version de serveur";
+            document.getElementById("proxy_text").innerHTML = "Voulez-vous installer les plugins Via* sur un proxy (BungeeCord, Velocity, ...) ?";
+            document.getElementById("versions").innerHTML = "Cochez les versions que vous souhaitez supporter";
+            document.getElementById("out_text").innerHTML = "Vous avez besoin de";
+            document.getElementById("warn").innerHTML = "Veuillez cocher au moins une version supplémentaire !";
+            document.getElementById("note").innerHTML = "Assurez-vous d'installer Via* uniquement sur le proxy OU sur chacun de vos serveurs (recommendé)";
+            blockMessage = "Collez ces nombres dans le fichier <code>config.yml</code> de ViaVersion à la ligne <code>block-protocols: <b class='tooltip'><span class='tooltiptext'>Clic pour copier</span>[$output]</b></code>";//todo add translation
+            toggleMessage = ["Tout cocher", "Tout décocher"];
+            document.getElementById("velocity").innerHTML = "Vous avez besoin de <a href='https://velocitypowered.com/' target='_blank' rel='noopener'>Velocity</a> comme proxy pour autoriser la version 1.7";
+            document.getElementById("credits").innerHTML = "Fait avec &hearts; par Jo0001";
         }
     };
     let toggleMessage = ["Check all", "Uncheck all"];
@@ -313,9 +325,9 @@
         document.getElementById("out").innerHTML = " ViaVersion" + (backwards ? " + ViaBackwards" : "") + (rewind ? " + ViaRewind" : "") + (rewind && !proxy ? " (+ ViaRewind Legacy Support)" : "");
         generateBlockList();
         if (player_versions.includes(5) && proxy) {
-            document.getElementById("travertine").style.display = "list-item";
+            document.getElementById("velocity").style.display = "list-item";
         } else {
-            document.getElementById("travertine").style.display = "none";
+            document.getElementById("velocity").style.display = "none";
         }
     }
 

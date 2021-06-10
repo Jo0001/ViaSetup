@@ -78,7 +78,7 @@
         <option value="18">1.8</option>
     </select>
     <br> <br>
-    <label for="proxy" id="proxy_text">Do you want to install Via* on a proxy (Bungee,...)?</label><input
+    <label for="proxy" id="proxy_text">Do you want to install Via* on a proxy (Bungee, Velocity,...)?</label><input
         type="checkbox" id="proxy"
         onchange="getPlugins()">
     <br><br>
@@ -112,7 +112,7 @@
 <footer id="credits">Made with &hearts; by Jo0001</footer>
 <script>
     let lang = new URLSearchParams(window.location.search).get("lang");
-    let langs = ["en", "de", "pt"];
+    let langs = ["en", "de", "pt", "fr"];
 
     if (!langs.includes(lang)) {
         lang = navigator.language.substring(0, 2);
@@ -124,7 +124,7 @@
 
     if (lang == "de") {
         document.getElementById("server_version_text").innerHTML = "W&auml;hle deine Server Version";
-        document.getElementById("proxy_text").innerHTML = "M&ouml;chtest du Via* auf einem Proxy installieren (Bungee,..)?";
+        document.getElementById("proxy_text").innerHTML = "M&ouml;chtest du Via* auf einem Proxy installieren (Bungee, Velocity,..)?";
         document.getElementById("lblWildcard").innerHTML = "Alle Sub-Versionen der Serverversion (z.B. 1.16.x)";
         document.getElementById("versions").innerHTML = "Klicke alle Versionen an, mit denen Spielern beitreten sollen";
         document.getElementById("out_text").innerHTML = "Du brauchst";
@@ -133,13 +133,23 @@
         document.getElementById("tip").innerHTML = "Um Versionen zu blockieren benutze <a href=\"https://via.krusic22.com\" target=\"_blank\" rel=\"noopener\">via.krusic22.com</a>";
     } else if (lang == "pt") {
         document.getElementById("server_version_text").innerHTML = "Selecione a versão do servidor";
-        document.getElementById("proxy_text").innerHTML = "Quer usar os plugins Via* em um proxy (BungeeCord, ...)?";
+        document.getElementById("proxy_text").innerHTML = "Quer usar os plugins Via* em um proxy (BungeeCord, Velocity, ...)?";
         document.getElementById("versions").innerHTML = "Selecione as versões para dar suporte";
         document.getElementById("out_text").innerHTML = "Você precisa de";
         document.getElementById("warn").innerHTML = "Selecione uma versão adicional!";
         document.getElementById("note").innerHTML = "Tenha certeza de que os plugins Via* estão somente no proxy ou nos servidores backend (configuração recomendada)";
         document.getElementById("tip").innerHTML = "Para bloquear determinadas versões, utilize o gerador disponível em <a href=\"https://via.krusic22.com\" target=\"_blank\" rel=\"noopener\">via.krusic22.com</a>";
         document.getElementById("credits").innerHTML = "Feito com &hearts; por Jo0001"
+    } else if (lang == "fr") {
+        document.getElementById("server_version_text").innerHTML = "Sélectionnez votre version de serveur";
+        document.getElementById("proxy_text").innerHTML = "Voulez-vous installer les plugins Via* sur un proxy (BungeeCord, Velocity, ...) ?";
+        document.getElementById("lblWildcard").innerHTML = "Toutes les sous-versions de la version du serveur (ex: 1.16.x) ?";
+        document.getElementById("versions").innerHTML = "Cochez les versions que vous souhaitez supporter";
+        document.getElementById("out_text").innerHTML = "Vous avez besoin de";
+        document.getElementById("warn").innerHTML = "Veuillez cocher au moins une version supplémentaire !";
+        document.getElementById("note").innerHTML = "Assurez-vous d'installer Via* uniquement sur le proxy OU sur chacun de vos serveurs (recommendé)";
+        document.getElementById("tip").innerHTML = "Pour bloquer certaines versions, utilisez <a href=\"https://via.krusic22.com\" target=\"_blank\" rel=\"noopener\">via.krusic22.com</a>";
+        document.getElementById("credits").innerHTML = "Fait avec &hearts; par Jo0001";
     }
 
     function getPlugins() {
