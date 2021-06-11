@@ -235,7 +235,7 @@
         <ul id="info_container">
             <li id="tip" style="display: none"></li>
             <li id="velocity" style="display: none">You need <a href="https://velocitypowered.com/"
-                                                                  target="_blank" rel="noopener">Velocity</a>
+                                                                target="_blank" rel="noopener">Velocity</a>
                 as proxy for 1.7 support
             </li>
             <li id="note">Make sure you have Via* only on the proxy OR on all backend servers (recommend
@@ -339,7 +339,9 @@
         });
         if (blocked_versions.length > 0) {
             document.getElementById("tip").innerHTML = blockMessage.replaceAll("$output", blocked_versions);
-            document.getElementsByClassName("tooltip")[0].addEventListener('click', saveToClipboard(blocked_versions));
+            document.getElementsByClassName("tooltip")[0].addEventListener('click', function () {
+                copyToClipboard(blocked_versions)
+            });
             document.getElementById("tip").style.display = "list-item";
         } else {
             document.getElementById("tip").style.display = "none";
@@ -366,9 +368,19 @@
     setCheckText();
 
     //copy blocklist to clipboard
-    function saveToClipboard(blocked_versions) {
-        navigator.clipboard.writeText("[" + blocked_versions + "]").catch(function (e) {
-            console.log(e);
+    function copyToClipboard(blocked_versions) {
+        let tooltiptextElm = document.getElementsByClassName("tooltiptext")[0];
+        navigator.clipboard.writeText("[" + blocked_versions + "]").then(function () {
+            tooltiptextElm.style.border = "5px solid green";
+            setTimeout(function () {
+                tooltiptextElm.style.border = "none";
+            }, 2500);
+        }, function (e) {
+            console.exception(e);
+            tooltiptextElm.style.border = "5px solid red";
+            setTimeout(function () {
+                tooltiptextElm.style.border = "none";
+            }, 2500);
         })
     }
 
