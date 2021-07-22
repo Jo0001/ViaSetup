@@ -7,15 +7,18 @@
 </head>
 <body>
 <div class="container">
-  <form id="parts" onchange="update()">
+  <form id="parts" onsubmit="update()" onchange="update()">
     <label for="back">Backend server:</label>
     <input class="form-control" type="text" id="back" name="back" placeholder="test.geysermc.org" value="test.geysermc.org" required>
     <br>
     <label for="bport">Backend server port:</label>
-    <input class="form-control" type="number" id="bport" name="bport" placeholder="25565">
+    <input class="form-control" type="number" id="bport" name="bport" placeholder="25565" min="0" max="65535">
     <br>
     <label for="bver">Backend version:</label>
     <input class="form-control" type="text" id="bver" name="bver" placeholder="(AUTO, 1.8, 1.12.2)">
+    <br>
+    <label for="bname">Backend username:</label>
+    <input class="form-control" type="text" id="bname" name="bname" placeholder="Dinnerbone" maxlength="16">
     <br>
     <label class="form-check-label" for="ot">Force online mode in frontend:</label>
     <input class="form-check-input" type="checkbox" id="ot" name="ot">
@@ -27,7 +30,7 @@
     <input class="form-control" type="text" id="suffix" name="suffix" placeholder="viaaas.example.com" value="viaaas.duckdns.org" required>
     <br>
     <label for="iport">VIAaaS instance port:</label>
-    <input class="form-control" type="number" id="iport" name="iport" placeholder="25565">
+    <input class="form-control" type="number" id="iport" name="iport" placeholder="25565" min="0" max="65535">
   </form>
   <div>
     <br>
@@ -35,16 +38,22 @@
     <input readonly class="form-control" type="text" id="generated">
   </div>
   <script>
+    document.getElementById("parts").addEventListener("submit", event => event.preventDefault());
     update();
 
     function update() {
       let address = v("back");
+      // Handle IPv6 with sslip.io
+      if (address.includes(":") || address.includes("[")) address = address.replaceAll(":", "-")
+          .replaceAll("[", "").replaceAll("]", "") + ".sslip.io";
       if (v("bport") != "") address += "._p" + v("bport");
       if (v("bver") != "") address += "._v" + v("bver").replaceAll(".", "_");
+      if (v("bname") != "") address += "._u" + v("bname");
       if (c("ot")) address += "._ot";
       if (c("of")) address += "._of";
       address += "." + v("suffix");
       if (v("iport") != "") address += ":" + v("iport");
+
       document.getElementById('generated').value = address;
     }
 
