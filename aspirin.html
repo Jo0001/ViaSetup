@@ -57,11 +57,11 @@
       <input class="form-control" type="text" id="bname" name="bname" placeholder="Dinnerbone" maxlength="16">
     </div>
     <div class="form-check mb-2">
-      <input class="form-check-input" type="checkbox" id="ot" name="ot">
+      <input class="form-check-input" type="checkbox" id="ot" name="ot" oninput="sc('of', false)">
       <label class="form-check-label" for="ot">Force online mode in frontend</label>
     </div>
     <div class="form-check mb-3">
-      <input class="form-check-input" type="checkbox" id="of" name="of">
+      <input class="form-check-input" type="checkbox" id="of" name="of" oninput="sc('ot', false)">
       <label class="form-check-label" for="of">Force offline mode in frontend (recommended for Geyser)</label>
     </div>
     <div class="input-group mb-3">
@@ -108,6 +108,10 @@
 
     function v(id) {
       return document.getElementById(id).value;
+    }
+
+    function sc(id, val) {
+      document.getElementById(id).checked = val;
     }
 
     function c(id) {
