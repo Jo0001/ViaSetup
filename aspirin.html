@@ -9,34 +9,72 @@
 <div class="container">
   <br>
   <form id="parts" onsubmit="update()" oninput="update()">
-    <label for="back">Backend server:</label>
-    <input class="form-control" type="text" id="back" name="back" placeholder="test.geysermc.org" value="test.geysermc.org" required>
-    <br>
-    <label for="bport">Backend server port:</label>
-    <input class="form-control" type="number" id="bport" name="bport" placeholder="25565" min="0" max="65535">
-    <br>
-    <label for="bver">Backend version:</label>
-    <input class="form-control" type="text" id="bver" name="bver" placeholder="(AUTO, 1.8, 1.12.2)">
-    <br>
-    <label for="bname">Backend username:</label>
-    <input class="form-control" type="text" id="bname" name="bname" placeholder="Dinnerbone" maxlength="16">
-    <br>
-    <label class="form-check-label" for="ot">Force online mode in frontend:</label>
-    <input class="form-check-input" type="checkbox" id="ot" name="ot">
-    <br>
-    <label class="form-check-label" for="of">Force offline mode in frontend (recommended for Geyser):</label>
-    <input class="form-check-input" type="checkbox" id="of" name="of">
-    <br>
-    <label for="suffix">VIAaaS instance suffix:</label>
-    <input class="form-control" type="text" id="suffix" name="suffix" placeholder="viaaas.example.com" value="viaaas.duckdns.org" required>
-    <br>
-    <label for="iport">VIAaaS instance port:</label>
-    <input class="form-control" type="number" id="iport" name="iport" placeholder="25565" min="0" max="65535">
+    <div class="input-group mb-2">
+      <label class="input-group-text" for="back">Backend Address</label>
+      <input aria-label="Backend Address" class="form-control" type="text" id="back" name="back" placeholder="test.geysermc.org" value="test.geysermc.org" required>
+      <input aria-label="Backend port" class="form-control" type="number" id="bport" name="bport" placeholder="25565" min="0" max="65535">
+    </div>
+    <div class="input-group mb-2">
+      <label class="input-group-text" for="bver">Backend Version</label>
+      <select class="form-select" id="bver" name="bver">
+        <option value="" selected>Select...</option>
+        <option>AUTO</option>
+        <option>1.17.1</option>
+        <option>1.17</option>
+        <option value="1.16.5">1.16.4/5</option>
+        <option>1.16.3</option>
+        <option>1.16.2</option>
+        <option>1.16.1</option>
+        <option>1.16</option>
+        <option>1.15.2</option>
+        <option>1.15.1</option>
+        <option>1.15</option>
+        <option>1.14.4</option>
+        <option>1.14.3</option>
+        <option>1.14.2</option>
+        <option>1.14.1</option>
+        <option>1.14</option>
+        <option>1.13.2</option>
+        <option>1.13.1</option>
+        <option>1.13</option>
+        <option>1.12.2</option>
+        <option>1.12.1</option>
+        <option>1.12</option>
+        <option value="1.11.2">1.11.1/2</option>
+        <option>1.11</option>
+        <option value="1.10">1.10.x</option>
+        <option value="1.9.4">1.9.3/4</option>
+        <option>1.9.2</option>
+        <option>1.9.1</option>
+        <option>1.9</option>
+        <option>1.8</option>
+        <option value="1.7.10">1.7.6-10</option>
+        <option value="1.7.5">1.7.2-5</option>
+      </select>
+    </div>
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="bname">Backend Username</label>
+      <input class="form-control" type="text" id="bname" name="bname" placeholder="Dinnerbone" maxlength="16">
+    </div>
+    <div class="form-check mb-2">
+      <input class="form-check-input" type="checkbox" id="ot" name="ot" oninput="sc('of', false)">
+      <label class="form-check-label" for="ot">Force online mode in frontend</label>
+    </div>
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" id="of" name="of" oninput="sc('ot', false)">
+      <label class="form-check-label" for="of">Force offline mode in frontend (recommended for Geyser)</label>
+    </div>
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="suffix">VIAaaS Address</label>
+      <input aria-label="VIAaaS adddress" class="form-control" type="text" id="suffix" name="suffix" placeholder="viaaas.example.com" value="viaaas.duckdns.org" required>
+      <input aria-label="VIAaaS port" class="form-control" type="number" id="iport" name="iport" placeholder="25565" min="0" max="65535">
+    </div>
   </form>
   <div>
-    <br>
-    <label for="generated">Your address is: </label>
-    <input readonly class="form-control" type="text" id="generated">
+    <div class="input-group mb-3" onclick="copyAddress()">
+      <label class="input-group-text" for="generated">Generated Address (click to copy)</label>
+      <input readonly class="form-control" type="text" id="generated">
+    </div>
   </div>
   <script>
     document.getElementById("parts").addEventListener("submit", event => event.preventDefault());
@@ -58,8 +96,22 @@
       document.getElementById('generated').value = address;
     }
 
+    function copyAddress() {
+        // https://www.w3schools.com/howto/howto_js_copy_clipboard.asp
+        let txt = document.getElementById("generated");
+
+        txt.select();
+        txt.setSelectionRange(0, 99999);
+
+        document.execCommand("copy");
+    }
+
     function v(id) {
       return document.getElementById(id).value;
+    }
+
+    function sc(id, val) {
+      document.getElementById(id).checked = val;
     }
 
     function c(id) {
