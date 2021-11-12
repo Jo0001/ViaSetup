@@ -149,6 +149,9 @@
     <label for="server_version" id="server_version_text">Select your server version</label>
     <select id="server_version" onchange="getPlugins()">
         <optgroup label="Latest">
+            <option value="757">1.18</option>
+        </optgroup>
+        <optgroup label="1.17.x">
             <option value="756">1.17.1</option>
             <option value="755">1.17</option>
         </optgroup>
@@ -205,41 +208,42 @@
     <br> <br>
     <label id="versions">Check versions you want to support</label><br>
     <div class="container">
-        <input onchange="getPlugins()" type="checkbox" value="5" id="5"><label for="5">1.7.x</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="47" id="47"><label for="47">1.8.x</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="107" id="107"><label for="107">1.9</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="108" id="108"><label for="108">1.9.1</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="109" id="109"><label for="109">1.9.2</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="110" id="110"><label for="110">1.9.3 & 1.9.4</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="210" id="210"><label for="210">1.10</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="315" id="315"><label for="315">1.11</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="316" id="316"><label for="316">1.11.1 &
-        1.11.2</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="757" id="757"><label for="757">1.18</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="756" id="756"><label for="756">1.17.1</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="755" id="755"><label for="755">1.17</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="754" id="754"><label for="754">1.16.4 & 1.16.5</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="753" id="753"><label for="753">1.16.3</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="751" id="751"><label for="751">1.16.2</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="736" id="736"><label for="736">1.16.1</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="735" id="735"><label for="735">1.16</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="578" id="578"><label for="578">1.15.2</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="575" id="575"><label for="575">1.15.1</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="573" id="573"><label for="573">1.15</label><br>
+    </div>
+    <div class="container">
+        <input onchange="getPlugins()" type="checkbox" value="498" id="498"><label for="498">1.14.4</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="490" id="490"><label for="490">1.14.3</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="485" id="485"><label for="485">1.14.2</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="480" id="480"><label for="480">1.14.1</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="477" id="477"><label for="477">1.14</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="404" id="404"><label for="404">1.13.2</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="401" id="401"><label for="401">1.13.1</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="393" id="393"><label for="393">1.13</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="340" id="340"><label for="340">1.12.2</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="338" id="338"><label for="338">1.12.1</label><br>
         <input onchange="getPlugins()" type="checkbox" value="335" id="335"><label for="335">1.12</label><br>
     </div>
     <div class="container">
-        <input onchange="getPlugins()" type="checkbox" value="338" id="338"><label for="338">1.12.1</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="340" id="340"><label for="340">1.12.2</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="393" id="393"><label for="393">1.13</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="401" id="401"><label for="401">1.13.1</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="404" id="404"><label for="404">1.13.2</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="477" id="477"><label for="477">1.14</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="480" id="480"><label for="480">1.14.1</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="485" id="485"><label for="485">1.14.2</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="490" id="490"><label for="490">1.14.3</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="498" id="498"><label for="498">1.14.4</label><br>
-    </div>
-    <div class="container">
-        <input onchange="getPlugins()" type="checkbox" value="573" id="573"><label for="573">1.15</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="575" id="575"><label for="575">1.15.1</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="578" id="578"><label for="578">1.15.2</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="735" id="735"><label for="735">1.16</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="736" id="736"><label for="736">1.16.1</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="751" id="751"><label for="751">1.16.2</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="753" id="753"><label for="753">1.16.3</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="754" id="754"><label for="754">1.16.4 & 1.16.5</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="755" id="755"><label for="755">1.17</label><br>
-        <input onchange="getPlugins()" type="checkbox" value="756" id="756"><label for="756">1.17.1</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="316" id="316"><label for="316">1.11.1 &
+        1.11.2</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="315" id="315"><label for="315">1.11</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="210" id="210"><label for="210">1.10</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="110" id="110"><label for="110">1.9.3 & 1.9.4</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="109" id="109"><label for="109">1.9.2</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="108" id="108"><label for="108">1.9.1</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="107" id="107"><label for="107">1.9</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="47" id="47"><label for="47">1.8.x</label><br>
+        <input onchange="getPlugins()" type="checkbox" value="5" id="5"><label for="5">1.7.x</label><br>
         <span id="check" onclick="toggleCheck()" style="cursor: pointer;text-decoration: underline;">Check all</span>
     </div>
     <br>
