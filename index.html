@@ -88,7 +88,6 @@
 
         .tooltip .tooltiptext {
             visibility: hidden;
-            width: 120px;
             background-color: black;
             color: #fff;
             text-align: center;
@@ -114,6 +113,10 @@
 
         .tooltip:hover .tooltiptext {
             visibility: visible;
+        }
+
+        .help {
+            cursor: help;
         }
 
         footer {
@@ -262,7 +265,9 @@
                                                                 target="_blank" rel="noopener">Velocity</a>
                 as proxy for 1.7 support
             </li>
-            <li id="note">Make sure you have Via* only on the proxy OR on all backend servers (recommend
+            <li id="note">Make sure you have Via* only on the <span class="tooltip help">proxy<span class="tooltiptext">BungeeCord, Waterfall, ...</span></span>
+                OR on all <span class="tooltip help">backend servers<span class="tooltiptext">Paper, Spigot, ...</span></span>
+                (recommend
                 setup)
             </li>
         </ul>
@@ -281,7 +286,7 @@
             document.getElementById("versions").innerHTML = "Klicke alle Versionen an, mit denen Spielern beitreten sollen";
             document.getElementById("out_text").innerHTML = "Du brauchst";
             document.getElementById("warn").innerHTML = "Bitte w&auml;hle eine weitere Version aus!";
-            document.getElementById("note").innerHTML = "Stelle sicher, dass du Via* nur auf dem Proxy ODER auf allen backend Servern installierst (empfohlenes Setup)";
+            document.getElementById("note").innerHTML = "Stelle sicher, dass du Via* nur auf dem <span class=\"tooltip help\">Proxy<span class=\"tooltiptext\">BungeeCord, Waterfall, ...</span></span> ODER auf allen <span class=\"tooltip help\">backend Servern<span class=\"tooltiptext\">Paper, Spigot, ...</span></span> installierst (empfohlenes Setup)";
             document.getElementById("velocity").innerHTML = "Du brauchst <a href=\"https://velocitypowered.com/\" target=\"_blank\" rel=\"noopener\">Velocity</a> als Proxy f&uuml;r 1.7 Support";
             blockMessage = "F&uuml;ge folgende Nummern in der ViaVersion <code>config.yml</code> unter <code>block-protocols: <b class='tooltip'><span class='tooltiptext'>Klicke zum kopieren</span>[$output]</b></code> ein";
             toggleMessage = ["Alle w&auml;hlen", "Alle abw&auml;hlen"];
