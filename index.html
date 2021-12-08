@@ -124,10 +124,19 @@
         }
 
         @media screen and (min-width: 500px) {
+            html {
+                background-image: url('img/background.webp');
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-attachment: fixed;
+            }
+
             .center {
                 margin-left: auto;
                 margin-right: auto;
                 width: 550px;
+                background-color: rgba(77, 77, 77, 0.84);
+                padding: 1px 15px 1px 15px;
             }
 
             .container {
