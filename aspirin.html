@@ -24,6 +24,7 @@
                 <option value="" selected>Select...</option>
                 <option>AUTO</option>
                 <optgroup label="1.18">
+                    <option>1.18.2</option>
                     <option value="1.18">1.18(.1)</option>
                 </optgroup>
                 <optgroup label="1.17">
@@ -58,7 +59,7 @@
                     <option>1.12.2</option>
                     <option>1.12.1</option>
                     <option>1.12</option>
-                </option>
+                </optgroup>
                 <optgroup label="1.11">
                     <option value="1.11.2">1.11.1/2</option>
                     <option>1.11</option>
@@ -86,11 +87,11 @@
             <input class="form-control" type="text" id="bname" name="bname" placeholder="Dinnerbone" maxlength="16">
         </div>
         <div class="form-check mb-2">
-            <input class="form-check-input" type="checkbox" id="ot" name="ot" oninput="sc('of')">
+            <input class="form-check-input" type="checkbox" id="ot" name="ot" oninput="uncheck('of')">
             <label class="form-check-label" for="ot">Force online mode in frontend</label>
         </div>
         <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" id="of" name="of" oninput="sc('ot')">
+            <input class="form-check-input" type="checkbox" id="of" name="of" oninput="uncheck('ot')">
             <label class="form-check-label" for="of">Force offline mode in frontend (recommended for Geyser)</label>
         </div>
         <div class="input-group mb-3">
@@ -112,17 +113,17 @@
         update();
 
         function update() {
-            let address = v("back");
+            let address = val("back");
             // Handle IPv6 with sslip.io
             if (address.includes(":") || address.includes("[")) address = address.replaceAll(":", "-")
                 .replaceAll("[", "").replaceAll("]", "") + ".sslip.io";
-            if (v("bport") !== "") address += "._p" + v("bport");
-            if (v("bver") !== "") address += "._v" + v("bver").replaceAll(".", "_");
-            if (v("bname") !== "") address += "._u" + v("bname");
-            if (c("ot")) address += "._ot";
-            if (c("of")) address += "._of";
-            address += "." + v("suffix");
-            if (v("iport") !== "") address += ":" + v("iport");
+            if (val("bport") !== "") address += "._p" + val("bport");
+            if (val("bver") !== "") address += "._v" + val("bver").replaceAll(".", "_");
+            if (val("bname") !== "") address += "._u" + val("bname");
+            if (isChecked("ot")) address += "._ot";
+            if (isChecked("of")) address += "._of";
+            address += "." + val("suffix");
+            if (val("iport") !== "") address += ":" + val("iport");
 
             document.getElementById('generated').value = address;
         }
@@ -137,15 +138,15 @@
             document.execCommand("copy");
         }
 
-        function v(id) {
+        function val(id) {
             return document.getElementById(id).value;
         }
 
-        function sc(id) {
+        function uncheck(id) {
             document.getElementById(id).checked = false;
         }
 
-        function c(id) {
+        function isChecked(id) {
             return document.getElementById(id).checked;
         }
     </script>
