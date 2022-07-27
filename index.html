@@ -161,7 +161,8 @@
     <label for="server_version" id="server_version_text">Select your server version</label>
     <select id="server_version" onchange="getPlugins()">
         <optgroup label="🐸 Latest">
-            <option value="759">🐸 1.19</option>
+            <option value="760">🐸 1.19.1</option>
+            <option value="759">1.19</option>
         </optgroup>
         <optgroup label="1.18.x">
             <option value="758">1.18.2</option>
@@ -225,6 +226,7 @@
     <label id="versions">Check versions you want to support</label><br>
     <div onchange="getPlugins()">
         <div class="container">
+            <input type="checkbox" value="760" id="760"><label for="760">1.19.1</label><br>
             <input type="checkbox" value="759" id="759"><label for="759">1.19</label><br>
             <input type="checkbox" value="758" id="758"><label for="758">1.18.2</label><br>
             <input type="checkbox" value="757" id="757"><label for="757">1.18 & 1.18.1</label><br>
