@@ -161,7 +161,8 @@
     <label for="server_version" id="server_version_text">Select your server version</label>
     <select id="server_version" onchange="getPlugins()">
         <optgroup label="🐸 Latest">
-            <option value="759">🐸 1.19</option>
+            <option value="760">🐸 1.19.1 & 1.19.2</option>
+            <option value="759">1.19</option>
         </optgroup>
         <optgroup label="1.18.x">
             <option value="758">1.18.2</option>
@@ -266,9 +267,34 @@
     }, {protocol: 110, version: "1.9.3", display: "1.9.3/4"}, {protocol: 210, version: "1.10"}, {
         protocol: 315,
         version: "1.11"
-    }]);
+    }, {protocol: 316, version: "1.11.1", display: "1.11.1/2"}, {protocol: 335, version: "1.12"}, {
+        protocol: 338,
+        version: "1.12.1"
+    }, {protocol: 340, version: "1.12.2"}, {protocol: 393, version: "1.13"}, {
+        protocol: 401,
+        version: "1.13.1"
+    }, {protocol: 404, version: "1.13.2"}, {protocol: 477, version: "1.14"}, {
+        protocol: 480,
+        version: "1.14.1"
+    }, {protocol: 485, version: "1.14.2"}, {protocol: 490, version: "1.14.3"}, {
+        protocol: 498,
+        version: "1.1.4"
+    }, {protocol: 573, version: "1.15"}, {protocol: 575, version: "1.15.1"}, {
+        protocol: 578,
+        version: "1.15.2"
+    }, {protocol: 735, version: "1.16"}, {protocol: 736, version: "1.16.1"}, {
+        protocol: 751,
+        version: "1.16.2"
+    }, {protocol: 753, version: "1.16.3"}, {protocol: 754, version: "1.16.4", display: "1.16.4/5"}, {
+        protocol: 755,
+        version: "1.17"
+    }, {protocol: 756, version: "1.17.1"}, {protocol: 757, version: "1.18", display: "1.18/1"}, {
+        protocol: 758,
+        version: "1.18.2"
+    }, {protocol: 759, version: "1.19"}, {protocol: 760, version: "1.19.1", display: "1.19.1/2"}]);
     //checkbox generator
-    versions.forEach(version => {
+    for (let i = 0; i < versions.length; i++) {
+        let version = versions[i];
         let input = document.createElement("input");
         input.type = "checkbox";
         input.value = version.protocol;
@@ -281,11 +307,16 @@
             label.innerText = version.version;
         }
         let br = document.createElement("br");
-
-        document.getElementsByClassName("container")[2].appendChild(input);
-        document.getElementsByClassName("container")[2].appendChild(label);
-        document.getElementsByClassName("container")[2].appendChild(br);
-    })
+        let idx = 2;
+        if (i < versions.length / 3) {
+            idx = 0;
+        } else if (i < versions.length / 3 * 2) {
+            idx = 1;
+        }
+        document.getElementsByClassName("container")[idx].appendChild(input);
+        document.getElementsByClassName("container")[idx].appendChild(label);
+        document.getElementsByClassName("container")[idx].appendChild(br);
+    }
 </script>
 <script>
     //Language settings
@@ -423,7 +454,8 @@
                 confArr = confArr.concat(middle);
                 confArr.push("<" + upperBound[0]);
             } else {
-                confArr = confArr.concat(range);
+                //   confArr = confArr.concat(range);
+                confArr.push(">" + range[range.length - 1])
             }
 
             function count(arr) {
