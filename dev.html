@@ -410,18 +410,19 @@
             });
             let confString;
             if (blocked_versions.length > 0) {
-                let range = [];
 
                 function convert(array) {
+                    let range = [];
                     for (let j = 0; j < array.length; j++) {
                         let offset = indexOf(array[0]);
                         if (array[j] !== versions[j + offset].protocol) {
                             range.push("|");
                             convert(array.slice(j, array.length))
-                            return;
+                            return range;
                         }
                         range.push(versions[j + offset].version);
                     }
+                    return range;
 
                     function indexOf(proto) {
                         for (let i = 0; i < versions.length; i++) {
@@ -433,7 +434,11 @@
                     }
                 }
 
-                convert(blocked_versions);
+                function convertToProtocol(mcstring) {
+                    return versions.find(version => version.version === mcstring).protocol;
+                }
+
+                let range = convert(blocked_versions);
                 let confArr = [];
                 let idx = range.indexOf("|");
                 if (idx !== -1) {
@@ -465,7 +470,8 @@
                     }
                 } else {
                     //   confArr = confArr.concat(range);
-                    confArr.push(">" + range[range.length - 1])
+                    let op = convertToProtocol(range[range.length - 1]) < server_version ? "<" : ">";
+                    confArr.push(op + range[range.length - 1]);
                 }
 
                 function count(arr) {
@@ -474,7 +480,6 @@
                     }).length;
                 }
 
-                console.warn(confArr)
                 confString = confArr.map(it =>
                     '"' + it + '"'
                 );
