@@ -413,25 +413,18 @@
 
                 function convert(array) {
                     let range = [];
-                    for (let j = 0; j < array.length; j++) {
-                        let offset = indexOf(array[0]);
-                        if (array[j] !== versions[j + offset].protocol) {
-                            range.push("|");
-                            convert(array.slice(j, array.length))
-                            return range;
-                        }
-                        range.push(versions[j + offset].version);
-                    }
-                    return range;
-
-                    function indexOf(proto) {
-                        for (let i = 0; i < versions.length; i++) {
-                            if (versions[i].protocol === proto) {
-                                return i;
+                    for (let i = 0; i < array.length; i++) {
+                        let version = versions.find((version) => version.protocol === array[i])
+                        if (i !== 0) {//skip check for the first entry
+                            let idx = versions.findIndex((version) => version.protocol === array[i]);
+                            let idxBefore = versions.findIndex((version) => version.protocol === array[i - 1]);
+                            if (idx - idxBefore > 1) {
+                                range.push("|");
                             }
                         }
-                        return -1;
+                        range.push(version.version);
                     }
+                    return range;
                 }
 
                 function convertToProtocol(mcstring) {
@@ -439,6 +432,8 @@
                 }
 
                 let range = convert(blocked_versions);
+                console.log("Raw blocked version(s):")
+                console.log(range)
                 let confArr = [];
                 let idx = range.indexOf("|");
                 if (idx !== -1) {
@@ -464,6 +459,7 @@
 
                     confArr = confArr.concat(middle);
                     if (player_versions.includes(versions[versions.length - 1].protocol)) {
+                        console.info(upperBound)
                         confArr.push(">" + upperBound[0]);
                     } else {
                         confArr = confArr.concat(upperBound);
