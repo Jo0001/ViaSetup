@@ -447,14 +447,15 @@
                 let idx = range.indexOf("|");
                 if (idx !== -1) {
                     let lowerBound = range.slice(0, idx);
-                    let upperBound = range.slice(range.lastIndexOf("|") + 1, range.lastIndexOf("|") + 2);
+                    let upperBound = range.slice(range.lastIndexOf("|") + 1, range.length);
 
                     let middle = [];
                     if (count(range) > 1) {
-                        middle = range.filter(it => {
-                            return lowerBound.indexOf(it) === -1;
-                        }).filter(it => {
-                            return upperBound.indexOf(it) === -1;
+                        //remove upper & lower and the separator to get the middle elements
+                        middle = range.filter(function (el) {
+                            return !upperBound.includes(el);
+                        }).filter(function (el) {
+                            return !lowerBound.includes(el);
                         }).filter(it => {
                             return it !== "|";
                         });
@@ -467,12 +468,10 @@
                     }
 
                     confArr = confArr.concat(middle);
-                    if (player_versions.includes(versions[versions.length - 1].protocol)) {
-                        console.info(upperBound)
-                        confArr.push(">" + upperBound[0]);
-                    } else {
-                        confArr = confArr.concat(upperBound);
-                    }
+
+                    let op = convertToProtocol(upperBound[0]) < server_version ? "<" : ">";
+                    confArr.push(op + upperBound[0]);
+
                 } else {
                     //   confArr = confArr.concat(range);
                     let op = convertToProtocol(range[range.length - 1]) < server_version ? "<" : ">";
