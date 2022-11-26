@@ -469,13 +469,20 @@
 
                     confArr = confArr.concat(middle);
 
-                    let op = convertToProtocol(upperBound[0]) < server_version ? "<" : ">";
-                    confArr.push(op + upperBound[0]);
+                    if (player_versions.includes(versions[versions.length - 1].protocol)) {
+                        confArr = confArr.concat(upperBound);
+                    } else {
+                        let op = convertToProtocol(upperBound[0]) < server_version ? "<" : ">";
+                        confArr.push(op + upperBound[0]);
+                    }
+
 
                 } else {
                     //   confArr = confArr.concat(range);
-                    let op = convertToProtocol(range[range.length - 1]) < server_version ? "<" : ">";
-                    confArr.push(op + range[range.length - 1]);
+                    let smaller = convertToProtocol(range[range.length - 1]) < server_version;
+                    let op = smaller ? "<" : ">";
+                    let idx = smaller ? range.length - 1 : 0;
+                    confArr.push(op + range[idx]);
                 }
 
                 function count(arr) {
