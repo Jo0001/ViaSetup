@@ -478,11 +478,15 @@
 
 
                 } else {
-                    //   confArr = confArr.concat(range);
-                    let smaller = convertToProtocol(range[range.length - 1]) < server_version;
-                    let op = smaller ? "<" : ">";
-                    let idx = smaller ? range.length - 1 : 0;
-                    confArr.push(op + range[idx]);
+                    if (player_versions[0] === 5) {//check if 1.7 is selected
+                        confArr = confArr.concat(range);
+                    } else {
+                        let smaller = convertToProtocol(range[range.length - 1]) < server_version;
+                        let op = smaller ? "<" : ">";
+                        let idx = smaller ? range.length - 1 : 0;
+                        confArr.push(op + range[idx]);
+                    }
+
                 }
 
                 function count(arr) {
