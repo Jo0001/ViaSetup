@@ -35,6 +35,10 @@
             background-color: #585962;
             color: whitesmoke;
             text-align: center;
+            background-image: url('img/background.webp');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
         }
 
         #info_container {
@@ -123,14 +127,19 @@
             text-align: left;
         }
 
-        @media screen and (min-width: 500px) {
+        @media screen and (max-width: 499px) {
             html {
-                background-image: url('img/background.webp');
-                background-repeat: no-repeat;
-                background-size: cover;
-                background-attachment: fixed;
+                background-image: url('img/background-mobile.webp');
             }
 
+            .container {
+                margin-left: auto;
+                margin-right: auto;
+                width: 100px;
+            }
+        }
+
+        @media screen and (min-width: 500px) {
             .center {
                 margin-left: auto;
                 margin-right: auto;
