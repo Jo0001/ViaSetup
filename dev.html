@@ -75,6 +75,11 @@
             color: darkred;
         }
 
+        #check {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
         #info_container {
             display: block;
             word-wrap: break-word;
@@ -135,7 +140,7 @@
             .container {
                 margin-left: auto;
                 margin-right: auto;
-                width: 100px;
+                width: 110px;
             }
         }
 
@@ -239,9 +244,6 @@
         <div class="container">
         </div>
         <div class="container">
-            <!-- todo
-            <span id="check" onclick="toggleCheck()"
-                  style="cursor: pointer;text-decoration: underline;">Check all</span> -->
         </div>
     </div>
     <br>
@@ -301,6 +303,8 @@
         protocol: 758,
         version: "1.18.2"
     }, {protocol: 759, version: "1.19"}, {protocol: 760, version: "1.19.1", display: "1.19.1/2"}]);
+
+    let server_version = parseInt(document.getElementById("server_version").value);
     //checkbox generator
     for (let i = 0; i < versions.length; i++) {
         let version = versions[i];
@@ -308,6 +312,9 @@
         input.type = "checkbox";
         input.value = version.protocol;
         input.id = version.protocol;
+        if (version.protocol === server_version) {
+            input.checked = true;
+        }
         let label = document.createElement("label");
         label.htmlFor = version.protocol;
         if (typeof version.display !== "undefined") {
@@ -326,6 +333,10 @@
         document.getElementsByClassName("container")[idx].appendChild(label);
         document.getElementsByClassName("container")[idx].appendChild(br);
     }
+    let span = document.createElement("span");
+    span.id = "check";
+    span.innerText = "Check all";
+    document.getElementsByClassName("container")[2].appendChild(span);
 </script>
 <script>
     //Language settings
@@ -383,6 +394,8 @@
 
     langs[lang]();
 
+    document.getElementById("check").addEventListener('click', toggleCheck)
+
     //Plugin generation
     function getPlugins() {
         let server_version = parseInt(document.getElementById("server_version").value);
@@ -395,6 +408,7 @@
         if (player_versions.includes(server_version) && player_versions.length === 1) {
             document.getElementById("output_container").style.display = "none";
             document.getElementById("warn").style.display = "inline-block";
+            document.getElementById("tip").style.display = "none";
             return;
         } else {
             document.getElementById("output_container").style.display = "inline-block";
@@ -418,95 +432,91 @@
                 return !isNaN(item);
             });
             let confString;
-            if (blocked_versions.length > 0) {
 
-                function convert(array) {
-                    let range = [];
-                    for (let i = 0; i < array.length; i++) {
-                        let version = versions.find((version) => version.protocol === array[i])
-                        if (i !== 0) {//skip check for the first entry
-                            let idx = versions.findIndex((version) => version.protocol === array[i]);
-                            let idxBefore = versions.findIndex((version) => version.protocol === array[i - 1]);
-                            if (idx - idxBefore > 1) {
-                                range.push("|");
-                            }
+            function convert(array) {
+                let range = [];
+                for (let i = 0; i < array.length; i++) {
+                    let version = versions.find((version) => version.protocol === array[i])
+                    if (i !== 0) {//skip check for the first entry
+                        let idx = versions.findIndex((version) => version.protocol === array[i]);
+                        let idxBefore = versions.findIndex((version) => version.protocol === array[i - 1]);
+                        if (idx - idxBefore > 1) {
+                            range.push("|");
                         }
-                        range.push(version.version);
                     }
-                    return range;
+                    range.push(version.version);
                 }
-
-                function convertToProtocol(mcstring) {
-                    return versions.find(version => version.version === mcstring).protocol;
-                }
-
-                let range = convert(blocked_versions);
-                console.log("Raw blocked version(s):")
-                console.log(range)
-                let confArr = [];
-                let idx = range.indexOf("|");
-                if (idx !== -1) {
-                    let lowerBound = range.slice(0, idx);
-                    let upperBound = range.slice(range.lastIndexOf("|") + 1, range.length);
-
-                    let middle = [];
-                    if (count(range) > 1) {
-                        //remove upper & lower and the separator to get the middle elements
-                        middle = range.filter(function (el) {
-                            return !upperBound.includes(el);
-                        }).filter(function (el) {
-                            return !lowerBound.includes(el);
-                        }).filter(it => {
-                            return it !== "|";
-                        });
-                    }
-
-                    if (player_versions.includes(versions[0].protocol)) {
-                        confArr = confArr.concat(lowerBound);
-                    } else {
-                        confArr.push("<" + lowerBound[idx - 1]);
-                    }
-
-                    confArr = confArr.concat(middle);
-
-                    if (player_versions.includes(versions[versions.length - 1].protocol)) {
-                        confArr = confArr.concat(upperBound);
-                    } else {
-                        let op = convertToProtocol(upperBound[0]) < server_version ? "<" : ">";
-                        confArr.push(op + upperBound[0]);
-                    }
-
-
-                } else {
-                    if (player_versions[0] === 5) {//check if 1.7 is selected
-                        confArr = confArr.concat(range);
-                    } else {
-                        let smaller = convertToProtocol(range[range.length - 1]) < server_version;
-                        let op = smaller ? "<" : ">";
-                        let idx = smaller ? range.length - 1 : 0;
-                        confArr.push(op + range[idx]);
-                    }
-
-                }
-
-                function count(arr) {
-                    return arr.filter(it => {
-                        return it === "|";
-                    }).length;
-                }
-
-                confString = confArr.map(it =>
-                    '"' + it + '"'
-                );
-
-                document.getElementById("tip").innerHTML = blockMessage.replaceAll("$output", confString);
-                document.getElementsByClassName("tooltip")[0].addEventListener('click', function () {
-                    copyToClipboard(confString)
-                });
-                document.getElementById("tip").style.display = "list-item";
-            } else {
-                document.getElementById("tip").style.display = "none";
+                return range;
             }
+
+            function convertToProtocol(mcstring) {
+                return versions.find(version => version.version === mcstring).protocol;
+            }
+
+            let range = convert(blocked_versions);
+            console.log("Raw blocked version(s):")
+            console.log(range)
+            let confArr = [];
+            let idx = range.indexOf("|");
+            if (idx !== -1) {
+                let lowerBound = range.slice(0, idx);
+                let upperBound = range.slice(range.lastIndexOf("|") + 1, range.length);
+
+                let middle = [];
+                if (count(range) > 1) {
+                    //remove upper & lower and the separator to get the middle elements
+                    middle = range.filter(function (el) {
+                        return !upperBound.includes(el);
+                    }).filter(function (el) {
+                        return !lowerBound.includes(el);
+                    }).filter(it => {
+                        return it !== "|";
+                    });
+                }
+
+                if (player_versions.includes(versions[0].protocol)) {
+                    confArr = confArr.concat(lowerBound);
+                } else {
+                    confArr.push("<" + lowerBound[idx - 1]);
+                }
+
+                confArr = confArr.concat(middle);
+
+                if (player_versions.includes(versions[versions.length - 1].protocol)) {
+                    confArr = confArr.concat(upperBound);
+                } else {
+                    let op = convertToProtocol(upperBound[0]) < server_version ? "<" : ">";
+                    confArr.push(op + upperBound[0]);
+                }
+
+
+            } else {
+                if (player_versions[0] === 5) {//check if 1.7 is selected
+                    confArr = confArr.concat(range);
+                } else {
+                    let smaller = convertToProtocol(range[range.length - 1]) < server_version;
+                    let op = smaller ? "<" : ">";
+                    let idx = smaller ? range.length - 1 : 0;
+                    confArr.push(op + range[idx]);
+                }
+
+            }
+
+            function count(arr) {
+                return arr.filter(it => {
+                    return it === "|";
+                }).length;
+            }
+
+            confString = confArr.map(it =>
+                '"' + it + '"'
+            );
+
+            document.getElementById("tip").innerHTML = blockMessage.replaceAll("$output", confString);
+            document.getElementsByClassName("tooltip")[0].addEventListener('click', function () {
+                copyToClipboard(confString)
+            });
+            document.getElementById("tip").style.display = "list-item";
         }
     }
 
@@ -524,7 +534,7 @@
     }
 
     function setCheckText() {
-        //   document.getElementById("check").innerHTML = check ? toggleMessage[1] : toggleMessage[0];TODO
+        document.getElementById("check").innerHTML = check ? toggleMessage[1] : toggleMessage[0];
     }
 
     setCheckText();
