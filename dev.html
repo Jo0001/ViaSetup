@@ -431,6 +431,10 @@
             }).map(it => parseInt(it.value)).filter(function (item) {
                 return !isNaN(item);
             });
+            if (blocked_versions.length === 0) {
+                document.getElementById("tip").style.display = "none";
+                return;
+            }
             let confString;
 
             function convert(array) {
@@ -454,8 +458,6 @@
             }
 
             let range = convert(blocked_versions);
-            console.log("Raw blocked version(s):")
-            console.log(range)
             let confArr = [];
             let idx = range.indexOf("|");
             if (idx !== -1) {
