@@ -174,8 +174,9 @@
     <h3>ViaSetup - Plugin Setup Generator for Via*</h3>
     <label for="server_version" id="server_version_text">Select your server version</label>
     <select id="server_version" onchange="getPlugins()">
-        <optgroup label="🐸 Latest">
-            <option value="760">🐸 1.19.1 & 1.19.2</option>
+        <optgroup label="Latest">
+            <option value="761">1.19.3</option>
+            <option value="760">1.19.1 & 1.19.2</option>
             <option value="759">1.19</option>
         </optgroup>
         <optgroup label="1.18.x">
@@ -302,7 +303,10 @@
     }, {protocol: 756, version: "1.17.1"}, {protocol: 757, version: "1.18", display: "1.18/1"}, {
         protocol: 758,
         version: "1.18.2"
-    }, {protocol: 759, version: "1.19"}, {protocol: 760, version: "1.19.1", display: "1.19.1/2"}]);
+    }, {protocol: 759, version: "1.19"}, {protocol: 760, version: "1.19.1", display: "1.19.1/2"}, {
+        protocol: 761,
+        version: "1.19.3"
+    }]);
 
     let server_version = parseInt(document.getElementById("server_version").value);
     //checkbox generator
