@@ -492,11 +492,16 @@
                 }
 
 
-            } else {//All checkboxes are one after the other without interruption
-                let upper = player_versions.at(-1) < convertToProtocol(range.at(-1));//all versions except the high ones are selected
-                let op = upper ? ">" : "<";
-                let version = upper ? convertToVersion(player_versions.at(-1)) : convertToVersion(player_versions[0]);
-                confArr.push(op + version);
+            } else {//All unchecked checkboxes are one after the other without interruption (they can be at the end/start or in the middle
+                //check if only some versions in the middle should be blocked
+                if (player_versions.includes(versions[0].protocol) && player_versions.includes(versions.at(-1).protocol)) {
+                    confArr = confArr.concat(range);
+                } else {
+                    let upper = player_versions.at(-1) < convertToProtocol(range.at(-1));//all versions except the high/end ones are selected
+                    let op = upper ? ">" : "<";
+                    let version = upper ? convertToVersion(player_versions.at(-1)) : convertToVersion(player_versions[0]);
+                    confArr.push(op + version);
+                }
             }
 
             function convertToVersion(protocol) {
