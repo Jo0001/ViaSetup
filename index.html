@@ -457,10 +457,6 @@
                 return range;
             }
 
-            function convertToProtocol(mcstring) {
-                return versions.find(version => version.version === mcstring).protocol;
-            }
-
             let range = convert(blocked_versions);
             let confArr = [];
             let idx = range.indexOf("|");
@@ -496,16 +492,19 @@
                 }
 
 
-            } else {
-                if (player_versions[0] === 5) {//check if 1.7 is selected
-                    confArr = confArr.concat(range);
-                } else {
-                    let smaller = convertToProtocol(range[range.length - 1]) < server_version;
-                    let op = smaller ? "<" : ">";
-                    let idx = smaller ? range.length - 1 : 0;
-                    confArr.push(op + range[idx]);
-                }
+            } else {//All checkboxes are one after the other without interruption
+                let upper = player_versions.at(-1) < convertToProtocol(range.at(-1));//all versions except the high ones are selected
+                let op = upper ? ">" : "<";
+                let version = upper ? convertToVersion(player_versions.at(-1)) : convertToVersion(player_versions[0]);
+                confArr.push(op + version);
+            }
 
+            function convertToVersion(protocol) {
+                return versions.find(version => version.protocol === protocol).version;
+            }
+
+            function convertToProtocol(mcstring) {
+                return versions.find(version => version.version === mcstring).protocol;
             }
 
             function count(arr) {
