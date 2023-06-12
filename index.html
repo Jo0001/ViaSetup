@@ -186,7 +186,7 @@
     <label for="server_version" id="server_version_text">Select your server version</label>
     <select id="server_version" onchange="getPlugins()">
         <optgroup label="Latest">
-            <option value="763">1.20 🐪</option>
+            <option value="763">1.20 & 1.20.1🐪</option>
         </optgroup>
         <optgroup label="1.19.x">
             <option value="762">1.19.4</option>
@@ -322,7 +322,7 @@
     }, {protocol: 759, version: "1.19"}, {protocol: 760, version: "1.19.1", display: "1.19.1/2"}, {
         protocol: 761,
         version: "1.19.3"
-    }, {protocol: 762, version: "1.19.4"},{protocol: 763, version: "1.20"}]);
+    }, {protocol: 762, version: "1.19.4"},{protocol: 763, version: "1.20", display: "1.20/.1"}]);
 
     let server_version = parseInt(document.getElementById("server_version").value);
     //checkbox generator
