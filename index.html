@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" sizes="128x128" href="https://avatars0.githubusercontent.com/u/47455182?s=128">
     <meta name="description" content="This tool tells you which Via* plugins you need depending on your server setup">
-    <meta name="keywords" content="viaversion, viabackwards, viarewind, setup, plugins, install, configuration, java-edition, protocol translator, addon, minecraft server">
+    <meta name="keywords"
+          content="viaversion, viabackwards, viarewind, setup, plugins, install, configuration, java-edition, protocol translator, addon, minecraft server">
     <meta property="og:type" content="website"/>
     <meta property="og:image" content="https://avatars0.githubusercontent.com/u/47455182?s=128&t=1">
     <meta property="og:url" content="https://jo0001.github.io/ViaSetup/"/>
@@ -186,7 +187,8 @@
     <label for="server_version" id="server_version_text">Select your server version</label>
     <select id="server_version" onchange="getPlugins()">
         <optgroup label="Latest">
-            <option value="763">1.20 & 1.20.1🐪</option>
+            <option value="764">1.20.2</option>
+            <option value="763">1.20</option>
         </optgroup>
         <optgroup label="1.19.x">
             <option value="762">1.19.4</option>
@@ -322,7 +324,10 @@
     }, {protocol: 759, version: "1.19"}, {protocol: 760, version: "1.19.1", display: "1.19.1/2"}, {
         protocol: 761,
         version: "1.19.3"
-    }, {protocol: 762, version: "1.19.4"},{protocol: 763, version: "1.20", display: "1.20/.1"}]);
+    }, {protocol: 762, version: "1.19.4"}, {protocol: 763, version: "1.20", display: "1.20/.1"}, {
+        protocol: 764,
+        version: "1.20.2"
+    }]);
 
     let server_version = parseInt(document.getElementById("server_version").value);
     //checkbox generator
