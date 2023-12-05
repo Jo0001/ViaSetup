@@ -187,6 +187,7 @@
     <label for="server_version" id="server_version_text">Select your server version</label>
     <select id="server_version" onchange="getPlugins()">
         <optgroup label="Latest">
+            <option value="765">1.20.3</option>
             <option value="764">1.20.2</option>
             <option value="763">1.20</option>
         </optgroup>
@@ -327,6 +328,9 @@
     }, {protocol: 762, version: "1.19.4"}, {protocol: 763, version: "1.20", display: "1.20/.1"}, {
         protocol: 764,
         version: "1.20.2"
+    }, {
+        protocol: 765,
+        version: "1.20.3"
     }]);
 
     let server_version = parseInt(document.getElementById("server_version").value);
