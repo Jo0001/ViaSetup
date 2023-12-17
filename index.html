@@ -15,6 +15,11 @@
     <meta property="og:title" content="ViaSetup - Plugin Setup Generator for Via*"/>
     <meta property="og:description"
           content="This tool tells you which Via* plugins you need depending on your server setup"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script async src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
     <!--    https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data-->
     <script type="application/ld+json">
         {
@@ -42,7 +47,7 @@
     </script>
     <link rel="manifest" href="manifest.json"/>
     <style>
-        html {
+        body {
             font-size: x-large;
             background-color: #585962;
             color: whitesmoke;
@@ -51,6 +56,13 @@
             background-repeat: no-repeat;
             background-size: cover;
             background-attachment: fixed;
+            font-family: unset;
+            line-height: unset;
+        }
+
+        label {
+            display: inline;
+            padding-left: 10px;
         }
 
         #info_container {
@@ -76,6 +88,7 @@
             background: #484848;
             display: none;
             padding: 10px;
+            margin: 20px;
         }
 
         #warn {
@@ -84,6 +97,7 @@
             border-radius: 8px;
             background: #ffb2b2;
             padding: 10px;
+            margin: 20px;
             color: darkred;
         }
 
@@ -101,13 +115,13 @@
             color: whitesmoke;
         }
 
-        .tooltip {
+        .ctooltip {
             position: relative;
             border-bottom: 1px dotted white;
             cursor: copy;
         }
 
-        .tooltip .tooltiptext {
+        .ctooltip .ctooltiptext {
             visibility: hidden;
             background-color: black;
             color: #fff;
@@ -121,7 +135,7 @@
             margin-left: -60px;
         }
 
-        .tooltip .tooltiptext::after {
+        .ctooltip .ctooltiptext::after {
             content: "";
             position: absolute;
             top: 100%;
@@ -132,7 +146,7 @@
             border-color: black transparent transparent transparent;
         }
 
-        .tooltip:hover .tooltiptext {
+        .ctooltip:hover .ctooltiptext {
             visibility: visible;
         }
 
@@ -140,12 +154,16 @@
             cursor: help;
         }
 
+        #server_version {
+            font-size: 15px;
+        }
+
         footer {
             text-align: left;
         }
 
         @media screen and (max-width: 499px) {
-            html {
+            body {
                 background-image: url('img/background-mobile.webp');
             }
 
@@ -162,14 +180,7 @@
                 margin-right: auto;
                 width: 550px;
                 background-color: rgba(77, 77, 77, 0.84);
-                padding: 1px 15px 1px 15px;
-            }
-
-            .container {
-                float: left;
-                padding: 10px;
-                box-sizing: border-box;
-                margin: 10px;
+                padding: 15px 15px 1px 15px;
             }
 
             footer {
@@ -182,7 +193,7 @@
     </style>
 </head>
 <body>
-<div class="center">
+<div class="center mt-4">
     <h3>ViaSetup - Plugin Setup Generator for Via*</h3>
     <label for="server_version" id="server_version_text">Select your server version</label>
     <select id="server_version" onchange="getPlugins()">
@@ -257,12 +268,14 @@
         onchange="getPlugins()">
     <br> <br>
     <label id="versions">Check versions you want to support</label><br>
-    <div onchange="getPlugins()">
-        <div class="container">
-        </div>
-        <div class="container">
-        </div>
-        <div class="container">
+    <div onchange="getPlugins()" class="container">
+        <div class="row">
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-4">
+            </div>
         </div>
     </div>
     <br>
@@ -277,8 +290,10 @@
                                                                 target="_blank" rel="noopener">Velocity</a>
                 as proxy for 1.7 support
             </li>
-            <li id="note">Make sure you have Via* only on the <span class="tooltip help">proxy<span class="tooltiptext">BungeeCord, Waterfall, ...</span></span>
-                OR on all <span class="tooltip help">backend servers<span class="tooltiptext">Paper, Spigot, ...</span></span>
+            <li id="note">Make sure you have Via* only on the <span class="ctooltip help">proxy<span
+                    class="ctooltiptext">BungeeCord, Waterfall, ...</span></span>
+                OR on all <span class="ctooltip help">backend servers<span
+                        class="ctooltiptext">Paper, Spigot, ...</span></span>
                 (recommend
                 setup)
             </li>
@@ -334,6 +349,7 @@
     }]);
 
     let server_version = parseInt(document.getElementById("server_version").value);
+    const container = "col-sm-4";
     //checkbox generator
     for (let i = 0; i < versions.length; i++) {
         let version = versions[i];
@@ -358,14 +374,14 @@
         } else if (i < versions.length / 3 * 2) {
             idx = 1;
         }
-        document.getElementsByClassName("container")[idx].appendChild(input);
-        document.getElementsByClassName("container")[idx].appendChild(label);
-        document.getElementsByClassName("container")[idx].appendChild(br);
+        document.getElementsByClassName(container)[idx].appendChild(input);
+        document.getElementsByClassName(container)[idx].appendChild(label);
+        document.getElementsByClassName(container)[idx].appendChild(br);
     }
     let span = document.createElement("span");
     span.id = "check";
     span.innerText = "Check all";
-    document.getElementsByClassName("container")[2].appendChild(span);
+    document.getElementsByClassName(container)[2].appendChild(span);
 </script>
 <script>
     //Language settings
@@ -379,9 +395,9 @@
             document.getElementById("versions").innerHTML = "Klicke alle Versionen an, mit denen Spielern beitreten sollen";
             document.getElementById("out_text").innerHTML = "Du brauchst";
             document.getElementById("warn").innerHTML = "Bitte w&auml;hle eine weitere Version aus!";
-            document.getElementById("note").innerHTML = "Stelle sicher, dass du Via* nur auf dem <span class=\"tooltip help\">Proxy<span class=\"tooltiptext\">BungeeCord, Waterfall, ...</span></span> ODER auf allen <span class=\"tooltip help\">backend Servern<span class=\"tooltiptext\">Paper, Spigot, ...</span></span> installierst (empfohlenes Setup)";
+            document.getElementById("note").innerHTML = "Stelle sicher, dass du Via* nur auf dem <span class=\"ctooltip help\">Proxy<span class=\"ctooltiptext\">BungeeCord, Waterfall, ...</span></span> ODER auf allen <span class=\"ctooltip help\">backend Servern<span class=\"ctooltiptext\">Paper, Spigot, ...</span></span> installierst (empfohlenes Setup)";
             document.getElementById("velocity").innerHTML = "Du brauchst <a href=\"https://velocitypowered.com/\" target=\"_blank\" rel=\"noopener\">Velocity</a> als Proxy f&uuml;r 1.7 Support";
-            blockMessage = "F&uuml;ge folgende Nummern in der ViaVersion <code>config.yml</code> unter <code>block-versions: <b class='tooltip'><span class='tooltiptext'>Klicke zum kopieren</span>[$output]</b></code> ein";
+            blockMessage = "F&uuml;ge folgende Nummern in der ViaVersion <code>config.yml</code> unter <code>block-versions: <b class='ctooltip'><span class='ctooltiptext'>Klicke zum kopieren</span>[$output]</b></code> ein";
             toggleMessage = ["Alle w&auml;hlen", "Alle abw&auml;hlen"];
         },
         "pt": () => {
@@ -391,7 +407,7 @@
             document.getElementById("out_text").innerHTML = "Você precisa de";
             document.getElementById("warn").innerHTML = "Selecione uma versão adicional!";
             document.getElementById("note").innerHTML = "Tenha certeza de que os plugins Via* estão somente no proxy ou nos servidores backend (configuração recomendada)";
-            blockMessage = "Insira estes números na <code>config.yml</code> do ViaVersion em <code>block-versions: <b class='tooltip'><span class='tooltiptext'>Click to copy</span>[$output]</b></code>";//todo add translation
+            blockMessage = "Insira estes números na <code>config.yml</code> do ViaVersion em <code>block-versions: <b class='ctooltip'><span class='ctooltiptext'>Click to copy</span>[$output]</b></code>";//todo add translation
             toggleMessage = ["Marcar tudo", "Desmarcar tudo"];
             document.getElementById("velocity").innerHTML = "Você precisará do <a href='https://velocitypowered.com/' target='_blank' rel='noopener'>Velocity</a> como proxy para aceitar a versão 1.7";
             document.getElementById("credits").innerHTML = "Feito com &hearts; por Jo0001";
@@ -402,15 +418,15 @@
             document.getElementById("versions").innerHTML = "Cochez les versions que vous souhaitez supporter";
             document.getElementById("out_text").innerHTML = "Vous avez besoin de";
             document.getElementById("warn").innerHTML = "Veuillez cocher au moins une version supplémentaire !";
-            document.getElementById("note").innerHTML = "Assurez-vous d'installer Via* uniquement sur le <span class=\"tooltip help\">proxy<span class=\"tooltiptext\">BungeeCord, Waterfall, ...</span></span> OU sur chacun de vos <span class=\"tooltip help\">serveurs<span class=\"tooltiptext\">Paper, Spigot, ...</span></span> (recommandé)";
-            blockMessage = "Collez ces nombres dans le fichier <code>config.yml</code> de ViaVersion à la ligne <code>block-versions: <b class='tooltip'><span class='tooltiptext'>Clique pour copier</span>[$output]</b></code>";
+            document.getElementById("note").innerHTML = "Assurez-vous d'installer Via* uniquement sur le <span class=\"ctooltip help\">proxy<span class=\"ctooltiptext\">BungeeCord, Waterfall, ...</span></span> OU sur chacun de vos <span class=\"ctooltip help\">serveurs<span class=\"ctooltiptext\">Paper, Spigot, ...</span></span> (recommandé)";
+            blockMessage = "Collez ces nombres dans le fichier <code>config.yml</code> de ViaVersion à la ligne <code>block-versions: <b class='ctooltip'><span class='ctooltiptext'>Clique pour copier</span>[$output]</b></code>";
             toggleMessage = ["Tout cocher", "Tout décocher"];
             document.getElementById("velocity").innerHTML = "Vous avez besoin de <a href='https://velocitypowered.com/' target='_blank' rel='noopener'>Velocity</a> comme proxy pour autoriser la version 1.7";
             document.getElementById("credits").innerHTML = "Fait avec &hearts; par Jo0001";
         }
     };
     let toggleMessage = ["Check all", "Uncheck all"];
-    let blockMessage = "Paste these numbers to the ViaVersion <code>config.yml</code> under <code>block-versions: <b class='tooltip'><span class='tooltiptext'>Click to copy</span>[$output]</b></code>";
+    let blockMessage = "Paste these numbers to the ViaVersion <code>config.yml</code> under <code>block-versions: <b class='ctooltip'><span class='ctooltiptext'>Click to copy</span>[$output]</b></code>";
 
     let langIds = Object.keys(langs);
     if (!langIds.includes(lang)) {
@@ -550,7 +566,7 @@
             );
 
             document.getElementById("tip").innerHTML = blockMessage.replaceAll("$output", confString);
-            document.getElementsByClassName("tooltip")[0].addEventListener('click', function () {
+            document.getElementsByClassName("ctooltip")[0].addEventListener('click', function () {
                 copyToClipboard(confString)
             });
             document.getElementById("tip").style.display = "list-item";
@@ -578,7 +594,7 @@
 
     //copy blocklist to clipboard
     function copyToClipboard(blocked_versions) {
-        let tooltiptextElm = document.getElementsByClassName("tooltiptext")[0];
+        let tooltiptextElm = document.getElementsByClassName("ctooltiptext")[0];
         navigator.clipboard.writeText("[" + blocked_versions + "]").then(function () {
             tooltiptextElm.style.border = "5px solid green";
             setTimeout(function () {
