@@ -416,7 +416,9 @@
     if (!langIds.includes(lang)) {
         lang = navigator.language.substring(0, 2);
         if (!langIds.includes(lang)) lang = "en";
-        history.replaceState(null, null, "?lang=" + lang);
+        let url = new URL(window.location);
+        url.searchParams.set("lang", lang);
+        history.replaceState(null, null, url);
     }
 
     document.documentElement.lang = lang;
