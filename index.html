@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ViaSetup</title>
+    <title>ViaVersion Setup</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" sizes="128x128" href="https://avatars0.githubusercontent.com/u/47455182?s=128">
     <meta name="description" content="This tool tells you which Via* plugins you need depending on your server setup">
@@ -11,7 +11,7 @@
     <meta property="og:type" content="website"/>
     <meta property="og:image" content="https://avatars0.githubusercontent.com/u/47455182?s=128&t=1">
     <meta property="og:url" content="https://viaversion.com/setup"/>
-    <meta property="og:site_name" content="ViaSetup"/>
+    <meta property="og:site_name" content="ViaVersion Setup"/>
     <meta property="og:title" content="ViaSetup - Plugin Setup Generator for Via*"/>
     <meta property="og:description"
           content="This tool tells you which Via* plugins you need depending on your server setup"/>
@@ -48,7 +48,6 @@
     <link rel="manifest" href="manifest.json"/>
     <style>
         body {
-            font-size: x-large;
             background-color: #585962;
             color: whitesmoke;
             text-align: center;
@@ -56,8 +55,6 @@
             background-repeat: no-repeat;
             background-size: cover;
             background-attachment: fixed;
-            font-family: unset;
-            line-height: unset;
         }
 
         label {
@@ -74,7 +71,7 @@
             padding-bottom: 10px;
         }
 
-        li {
+        .li_info {
             padding: 10px;
         }
 
@@ -178,9 +175,11 @@
             .center {
                 margin-left: auto;
                 margin-right: auto;
-                width: 550px;
+                max-width: 740px;
                 background-color: rgba(77, 77, 77, 0.84);
                 padding: 15px 15px 1px 15px;
+                margin-top: 60px;
+                font-size: x-large;
             }
 
             footer {
@@ -189,11 +188,45 @@
                 bottom: 10px;
             }
         }
-
     </style>
 </head>
 <body>
-<div class="center mt-4">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="ViaSuite.html"><img src="img/logotext-small.png"
+                                                              alt="Via logo" height="32"> ViaVersion</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="ViaSuite.html">ViaSuite</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://discord.gg/viaversion">Discord</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/ViaVersion">Github</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Tools
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item active" aria-current="page" href="index.html">ViaSetup</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="center">
     <h3>ViaSetup - Plugin Setup Generator for Via*</h3>
     <label for="server_version" id="server_version_text">Select your server version</label>
     <select id="server_version" onchange="getPlugins()">
@@ -262,11 +295,11 @@
             <option value="47">1.8.8</option>
         </optgroup>
     </select>
-    <br> <br>
+    <br>
     <label for="proxy" id="proxy_text">Do you want to install Via* on a proxy (Bungee, Velocity,...)?</label><input
         type="checkbox" id="proxy"
         onchange="getPlugins()">
-    <br> <br>
+    <br>
     <label id="versions">Check versions you want to support</label><br>
     <div onchange="getPlugins()" class="container">
         <div class="row">
@@ -278,31 +311,35 @@
             </div>
         </div>
     </div>
-    <br>
     <div style="clear: both">
         <div id="output_container">
             <span style="font-weight: bold" id="out_text">You need  </span><code id="out"></code></div>
         <div id="warn">Please select at least one additional version!</div>
         <br>
         <ul id="info_container">
-            <li id="tip" style="display: none"></li>
-            <li id="velocity" style="display: none">You need <a href="https://velocitypowered.com/"
-                                                                target="_blank" rel="noopener">Velocity</a>
+            <li id="tip" class="li_info" style="display: none"></li>
+            <li id="velocity" class="li_info" style="display: none">You need <a href="https://velocitypowered.com/"
+                                                                                target="_blank"
+                                                                                rel="noopener">Velocity</a>
                 as proxy for 1.7 support
             </li>
-            <li id="note">Make sure you have Via* only on the <span class="ctooltip help">proxy<span
+            <li id="note" class="li_info">Make sure you have Via* only on the <span class="ctooltip help">proxy<span
                     class="ctooltiptext">BungeeCord, Waterfall, ...</span></span>
                 OR on all <span class="ctooltip help">backend servers<span
                         class="ctooltiptext">Paper, Spigot, ...</span></span>
                 (recommend
                 setup)
             </li>
-            <li>Also check out the whole Via* Suite (mods,...) <a href="ViaSuite.html">here</a></li>
         </ul>
     </div>
 </div>
 <footer id="credits">Made with &hearts; by Jo0001</footer>
 <script>
+    const allowdhosts = ["localhost", "jo0001.github.io"];
+    if (!allowdhosts.includes(document.location.hostname)) {
+        window.location = "https://viaversion.com/setup";
+    }
+
     let versions = Array.from([{protocol: 5, version: "1.7", display: "1.7.x"}, {
         protocol: 47,
         version: "1.8",
