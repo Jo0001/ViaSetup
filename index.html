@@ -480,7 +480,7 @@
             document.getElementById("warn").style.display = "none";
         }
         let rewind = player_versions.some(it => it < server_version && it < 107);
-        let backwards = player_versions.some(it => (it < server_version && server_version > 47 && !(it === 5 || it === 47)) || (rewind && server_version > 47));
+        let backwards = player_versions.some(it => (it < server_version));
         let proxy = document.getElementById("proxy").checked;
         document.getElementById("out").innerHTML = " ViaVersion" + (backwards ? " + ViaBackwards" : "") + (rewind ? " + ViaRewind" : "") + (rewind && !proxy ? " (+ ViaRewind Legacy Support)" : "");
         generateBlockList();
