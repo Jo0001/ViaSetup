@@ -8,7 +8,7 @@
     <meta name="description"
           content="This tool will guide you on installing ViaVersion and its addons depending on your server setup">
     <meta name="keywords"
-          content="viaversion, viabackwards, viarewind, setup, plugin, install, configuration, java-edition, protocol translator, addon, minecraft server, paper, velocity, waterfall, bungeecord, spigot, block-version, block-protocols, proxy">
+          content="viaversion, viabackwards, viarewind, sponge, viabungee, velocity, setup, plugin, install, configuration, java-edition, protocol translator, addon, minecraft server, paper, velocity, waterfall, bungeecord, spigot, block-version, block-protocols, proxy">
     <meta property="og:type" content="website"/>
     <meta property="og:image" content="https://avatars0.githubusercontent.com/u/47455182?s=128&t=1">
     <meta property="og:url" content="https://viaversion.com/setup"/>
@@ -127,7 +127,7 @@
             cursor: help;
         }
 
-        #server_version {
+        #server_version, #proxy {
             font-size: 15px;
         }
 
@@ -208,7 +208,10 @@
     <label for="server_version" id="server_version_text">Select your server version</label>
     <select id="server_version" onchange="getPlugins()">
         <optgroup label="Latest">
-            <option value="766">🐺1.20.5 & 1.20.6</option>
+            <option value="767">🗝️1.21</option>
+        </optgroup>
+        <optgroup label="1.20.x">
+            <option value="766">1.20.5 & 1.20.6</option>
             <option value="765">1.20.3 & 1.20.4</option>
             <option value="764">1.20.2</option>
             <option value="763">1.20 & 1.20.1</option>
@@ -274,9 +277,14 @@
         </optgroup>
     </select>
     <br>
-    <label for="proxy" id="proxy_text">Do you want to install Via* on a proxy (Bungee, Velocity,...)?</label><input
-        type="checkbox" id="proxy"
-        onchange="getPlugins()">
+    <label for="proxy" id="proxy_text">Do you want to install Via* on a proxy (Bungee, Velocity,...)?</label>
+    <select id="proxy" onchange="getPlugins()">
+        <option id="pNo" value="none">No</option>
+        <option value="velocity">Velocity</option>
+        <option value="bungeecord">BungeeCord</option>
+        <option value="sponge">Sponge</option>
+        <option value="other" id="pOther">Other</option>
+    </select>
     <br>
     <label id="versions">Check versions you want to support</label><br>
     <div onchange="getPlugins()" class="container">
@@ -364,7 +372,11 @@
     }, {
         protocol: 766,
         version: "1.20.5", display: "1.20.5/6"
-    }]);
+    }, {
+        protocol: 767,
+        version: "1.21"
+    }
+    ]);
 
     let server_version = parseInt(document.getElementById("server_version").value);
     const container = "col-sm-4";
@@ -410,6 +422,8 @@
         "de": () => {
             document.getElementById("server_version_text").innerHTML = "W&auml;hle deine Server Version";
             document.getElementById("proxy_text").innerHTML = "M&ouml;chtest du Via* auf einem Proxy installieren (Bungee, Velocity,..)?";
+            document.getElementById("pNo").innerHTML = "Nein";
+            document.getElementById("pOther").innerHTML = "Anderer";
             document.getElementById("versions").innerHTML = "Klicke alle Versionen an, mit denen Spielern beitreten sollen";
             document.getElementById("out_text").innerHTML = "Du brauchst";
             document.getElementById("warn").innerHTML = "Bitte w&auml;hle eine weitere Version aus!";
@@ -481,10 +495,11 @@
         }
         let rewind = player_versions.some(it => it < server_version && it < 107);
         let backwards = player_versions.some(it => (it < server_version));
-        let proxy = document.getElementById("proxy").checked;
-        document.getElementById("out").innerHTML = " ViaVersion" + (backwards ? " + ViaBackwards" : "") + (rewind ? " + ViaRewind" : "") + (rewind && !proxy ? " (+ ViaRewind Legacy Support)" : "");
+        let proxyType = document.getElementById("proxy").value;
+        let proxy = proxyType !== "none";
+        document.getElementById("out").innerHTML = " ViaVersion" + (backwards ? " + ViaBackwards" : "") + (rewind ? " + ViaRewind" : "") + (rewind && !proxy ? " (+ ViaRewind Legacy Support)" : "") + (proxyType === "bungeecord" ? " + ViaBungee" : "") + (proxyType === "sponge" ? " + ViaSponge" : "");
         generateBlockList();
-        if (player_versions.includes(5) && proxy) {
+        if (player_versions.includes(5) && proxy && proxyType !== "velocity") {
             document.getElementById("velocity").style.display = "list-item";
         } else {
             document.getElementById("velocity").style.display = "none";
