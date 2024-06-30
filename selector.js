@@ -102,6 +102,9 @@ function create(obj) {
                 create(i);
             });
         });
+    } else {
+        document.getElementById(data).classList.add("glow");
+        document.getElementById(data).scrollIntoView(false);
     }
     lasttype = type;
 
@@ -133,7 +136,8 @@ function start() {
 function reset() {
     content.innerHTML = "";
     resetbtn.style.display = "none";
+    for (const e of Array.from(document.getElementsByClassName("glow"))) {
+        e.classList.remove("glow");
+    }
     start();
 }
-
-//start();
