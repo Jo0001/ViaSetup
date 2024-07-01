@@ -1,6 +1,6 @@
 const data = {
     "type": "question",
-    "data": "Which type?",
+    "data": "Where do you want to install Via?",
     "next": [
         {
             "type": "option",
