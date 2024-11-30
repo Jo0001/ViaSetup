@@ -22,6 +22,7 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
     <link rel="manifest" href="manifest.json"/>
+    <meta http-equiv="refresh" content="30; url=https://viaversion.com/setup.html" />
     <style>
         body {
             background-color: #585962;
@@ -38,97 +39,8 @@
             padding-left: 10px;
         }
 
-        #info_container {
-            text-align: left;
-            border: 2px solid #ffc300;
-            border-radius: 8px;
-            background: #484848;
-            display: inline-block;
-            padding-bottom: 10px;
-        }
-
-        .li_info {
-            padding: 10px;
-        }
-
-        .container {
-            text-align: left;
-        }
-
-        #output_container {
-            border: 2px solid green;
-            border-radius: 8px;
-            background: #484848;
-            display: none;
-            padding: 10px;
-            margin: 20px;
-        }
-
-        #warn {
-            display: none;
-            border: 2px solid darkred;
-            border-radius: 8px;
-            background: #ffb2b2;
-            padding: 10px;
-            margin: 20px;
-            color: darkred;
-        }
-
-        #check {
-            cursor: pointer;
-            text-decoration: underline;
-        }
-
-        #info_container {
-            display: block;
-            word-wrap: break-word;
-        }
-
         a {
             color: whitesmoke;
-        }
-
-        .ctooltip {
-            position: relative;
-            border-bottom: 1px dotted white;
-            cursor: copy;
-        }
-
-        .ctooltip .ctooltiptext {
-            visibility: hidden;
-            background-color: black;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 50%;
-            left: 50%;
-            margin-left: -60px;
-        }
-
-        .ctooltip .ctooltiptext::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: black transparent transparent transparent;
-        }
-
-        .ctooltip:hover .ctooltiptext {
-            visibility: visible;
-        }
-
-        .help {
-            cursor: help;
-        }
-
-        #server_version, #proxy {
-            font-size: 15px;
         }
 
         footer {
@@ -194,7 +106,8 @@
                             Tools
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item active" aria-current="page" href="index.html">ViaSetup</a></li>
+                            <li><a class="dropdown-item active" aria-current="page" href="index_old.html">ViaSetup</a>
+                            </li>
                             <li><a class="dropdown-item" href="aspirin.html">VIAaaS address generator</a></li>
                         </ul>
                     </li>
@@ -204,122 +117,11 @@
     </nav>
 </header>
 <div class="center">
-    <div class="alert alert-info" role="alert" style="color: black">
-       This page has been moved to <a href="https://viaversion.com/setup.html" title="ViaSetup" style="color: black"> our new homepage</a>
-    </div>
     <h3>ViaSetup - Plugin Setup Generator for Via*</h3>
-    <label for="server_version" id="server_version_text">Select your server version</label>
-    <select id="server_version" onchange="getPlugins()">
-        <optgroup label="Latest">
-            <option value="767">🗝️1.21 & 1.21.1</option>
-        </optgroup>
-        <optgroup label="1.20.x">
-            <option value="766">1.20.5 & 1.20.6</option>
-            <option value="765">1.20.3 & 1.20.4</option>
-            <option value="764">1.20.2</option>
-            <option value="763">1.20 & 1.20.1</option>
-        </optgroup>
-        <optgroup label="1.19.x">
-            <option value="762">1.19.4</option>
-            <option value="761">1.19.3</option>
-            <option value="760">1.19.1 & 1.19.2</option>
-            <option value="759">1.19</option>
-        </optgroup>
-        <optgroup label="1.18.x">
-            <option value="758">1.18.2</option>
-            <option value="757">1.18 & 1.18.1</option>
-        </optgroup>
-        <optgroup label="1.17.x">
-            <option value="756">1.17.1</option>
-            <option value="755">1.17</option>
-        </optgroup>
-        <optgroup label="1.16.x">
-            <option value="754">1.16.4 & 1.16.5</option>
-            <option value="753">1.16.3</option>
-            <option value="751">1.16.2</option>
-            <option value="736">1.16.1</option>
-            <option value="735">1.16</option>
-        </optgroup>
-        <optgroup label="1.15.x">
-            <option value="578">1.15.2</option>
-            <option value="575">1.15.1</option>
-            <option value="573">1.15</option>
-        </optgroup>
-        <optgroup label="1.14.x">
-            <option value="498">1.14.4</option>
-            <option value="490">1.14.3</option>
-            <option value="485">1.14.2</option>
-            <option value="480">1.14.1</option>
-            <option value="477">1.14</option>
-        </optgroup>
-        <optgroup label="1.13.x">
-            <option value="404">1.13.2</option>
-            <option value="401">1.13.1</option>
-            <option value="393">1.13</option>
-        </optgroup>
-        <optgroup label="1.12.x">
-            <option value="340">1.12.2</option>
-            <option value="338">1.12.1</option>
-            <option value="335">1.12</option>
-        </optgroup>
-        <optgroup label="1.11.x">
-            <option value="316">1.11.1 & 1.11.2</option>
-            <option value="315">1.11</option>
-        </optgroup>
-        <optgroup label="1.10.x">
-            <option value="210">1.10.x</option>
-        </optgroup>
-        <optgroup label="1.9.x">
-            <option value="110">1.9.3 & 1.9.4</option>
-            <option value="109">1.9.2</option>
-            <option value="108">1.9.1</option>
-            <option value="107">1.9</option>
-        </optgroup>
-        <optgroup label="1.8.8 Legacy">
-            <option value="47">1.8.8</option>
-        </optgroup>
-    </select>
-    <br>
-    <label for="proxy" id="proxy_text">Do you want to install Via* on a proxy (Bungee, Velocity,...)?</label>
-    <select id="proxy" onchange="getPlugins()">
-        <option id="pNo" value="none">No</option>
-        <option value="velocity">Velocity</option>
-        <option value="bungeecord">BungeeCord</option>
-        <option value="sponge">Sponge</option>
-        <option value="other" id="pOther">Other</option>
-    </select>
-    <br>
-    <label id="versions">Check versions you want to support</label><br>
-    <div onchange="getPlugins()" class="container">
-        <div class="row">
-            <div class="col-sm-4">
-            </div>
-            <div class="col-sm-4">
-            </div>
-            <div class="col-sm-4">
-            </div>
-        </div>
-    </div>
-    <div style="clear: both">
-        <div id="output_container">
-            <span style="font-weight: bold" id="out_text">You need  </span><code id="out"></code></div>
-        <div id="warn">Please select at least one additional version!</div>
-        <br>
-        <ul id="info_container">
-            <li id="tip" class="li_info" style="display: none"></li>
-            <li id="velocity" class="li_info" style="display: none">You need <a href="https://velocitypowered.com/"
-                                                                                target="_blank"
-                                                                                rel="noopener">Velocity</a>
-                as proxy for 1.7 support
-            </li>
-            <li id="note" class="li_info">Make sure you have Via* only on the <span class="ctooltip help">proxy<span
-                    class="ctooltiptext">BungeeCord, Velocity, ...</span></span>
-                OR on all <span class="ctooltip help">backend servers<span
-                        class="ctooltiptext">Paper, Spigot, ...</span></span>
-                (recommend
-                setup)
-            </li>
-        </ul>
+    <div class="alert alert-success" role="alert" style="color: black" id="move">
+        The ViaSetup page has been moved to <a href="https://viaversion.com/setup.html" title="ViaSetup"
+                                               style="color: black">
+        our new homepage</a>
     </div>
 </div>
 <footer id="credits">Made with &hearts; by Jo0001</footer>
@@ -328,93 +130,6 @@
     if (!allowdhosts.includes(document.location.hostname)) {
         window.location = "https://viaversion.com/setup";
     }
-
-    let versions = Array.from([{protocol: 5, version: "1.7", display: "1.7.x"}, {
-        protocol: 47,
-        version: "1.8",
-        display: "1.8.x"
-    }, {protocol: 107, version: "1.9"}, {protocol: 108, version: "1.9.1"}, {
-        protocol: 109,
-        version: "1.9.2"
-    }, {protocol: 110, version: "1.9.3", display: "1.9.3/4"}, {protocol: 210, version: "1.10", display: "1.10.x"}, {
-        protocol: 315,
-        version: "1.11"
-    }, {protocol: 316, version: "1.11.1", display: "1.11.1/2"}, {protocol: 335, version: "1.12"}, {
-        protocol: 338,
-        version: "1.12.1"
-    }, {protocol: 340, version: "1.12.2"}, {protocol: 393, version: "1.13"}, {
-        protocol: 401,
-        version: "1.13.1"
-    }, {protocol: 404, version: "1.13.2"}, {protocol: 477, version: "1.14"}, {
-        protocol: 480,
-        version: "1.14.1"
-    }, {protocol: 485, version: "1.14.2"}, {protocol: 490, version: "1.14.3"}, {
-        protocol: 498,
-        version: "1.14.4"
-    }, {protocol: 573, version: "1.15"}, {protocol: 575, version: "1.15.1"}, {
-        protocol: 578,
-        version: "1.15.2"
-    }, {protocol: 735, version: "1.16"}, {protocol: 736, version: "1.16.1"}, {
-        protocol: 751,
-        version: "1.16.2"
-    }, {protocol: 753, version: "1.16.3"}, {protocol: 754, version: "1.16.4", display: "1.16.4/5"}, {
-        protocol: 755,
-        version: "1.17"
-    }, {protocol: 756, version: "1.17.1"}, {protocol: 757, version: "1.18", display: "1.18/1"}, {
-        protocol: 758,
-        version: "1.18.2"
-    }, {protocol: 759, version: "1.19"}, {protocol: 760, version: "1.19.1", display: "1.19.1/2"}, {
-        protocol: 761,
-        version: "1.19.3"
-    }, {protocol: 762, version: "1.19.4"}, {protocol: 763, version: "1.20", display: "1.20/.1"}, {
-        protocol: 764,
-        version: "1.20.2"
-    }, {
-        protocol: 765,
-        version: "1.20.3", display: "1.20.3/4"
-    }, {
-        protocol: 766,
-        version: "1.20.5", display: "1.20.5/6"
-    }, {
-        protocol: 767,
-        version: "1.21", display: "1.21/.1"
-    }
-    ]);
-
-    let server_version = parseInt(document.getElementById("server_version").value);
-    const container = "col-sm-4";
-    //checkbox generator
-    for (let i = 0; i < versions.length; i++) {
-        let version = versions[i];
-        let input = document.createElement("input");
-        input.type = "checkbox";
-        input.value = version.protocol;
-        input.id = version.protocol;
-        if (version.protocol === server_version) {
-            input.checked = true;
-        }
-        let label = document.createElement("label");
-        label.htmlFor = version.protocol;
-        if (typeof version.display !== "undefined") {
-            label.innerText = version.display;
-        } else {
-            label.innerText = version.version;
-        }
-        let br = document.createElement("br");
-        let idx = 2;
-        if (i < versions.length / 3) {
-            idx = 0;
-        } else if (i < versions.length / 3 * 2) {
-            idx = 1;
-        }
-        document.getElementsByClassName(container)[idx].appendChild(input);
-        document.getElementsByClassName(container)[idx].appendChild(label);
-        document.getElementsByClassName(container)[idx].appendChild(br);
-    }
-    let span = document.createElement("span");
-    span.id = "check";
-    span.innerText = "Check all";
-    document.getElementsByClassName(container)[2].appendChild(span);
 </script>
 <script>
     //Language settings
@@ -423,45 +138,17 @@
         "en": () => {
         },
         "de": () => {
-            document.getElementById("server_version_text").innerHTML = "W&auml;hle deine Server Version";
-            document.getElementById("proxy_text").innerHTML = "M&ouml;chtest du Via* auf einem Proxy installieren (Bungee, Velocity,..)?";
-            document.getElementById("pNo").innerHTML = "Nein";
-            document.getElementById("pOther").innerHTML = "Anderer";
-            document.getElementById("versions").innerHTML = "Klicke alle Versionen an, mit denen Spielern beitreten sollen";
-            document.getElementById("out_text").innerHTML = "Du brauchst";
-            document.getElementById("warn").innerHTML = "Bitte w&auml;hle eine weitere Version aus!";
-            document.getElementById("note").innerHTML = "Stelle sicher, dass du Via* nur auf dem <span class=\"ctooltip help\">Proxy<span class=\"ctooltiptext\">BungeeCord, Velocity, ...</span></span> ODER auf allen <span class=\"ctooltip help\">backend Servern<span class=\"ctooltiptext\">Paper, Spigot, ...</span></span> installierst (empfohlenes Setup)";
-            document.getElementById("velocity").innerHTML = "Du brauchst <a href=\"https://velocitypowered.com/\" target=\"_blank\" rel=\"noopener\">Velocity</a> als Proxy f&uuml;r 1.7 Support";
-            blockMessage = "F&uuml;ge folgende Nummern in der ViaVersion <code>config.yml</code> unter <code>block-versions: <b class='ctooltip'><span class='ctooltiptext'>Klicke zum kopieren</span>[$output]</b></code> ein";
-            toggleMessage = ["Alle w&auml;hlen", "Alle abw&auml;hlen"];
+            document.getElementById("move").innerHTML = "Die ViaSetup Seite findest du <a href=\"https://viaversion.com/setup.html\" title=\"ViaSetup\" style=\"color: black\">auf unserer neuen Homepage</a>";
         },
         "pt": () => {
-            document.getElementById("server_version_text").innerHTML = "Selecione a versão do servidor";
-            document.getElementById("proxy_text").innerHTML = "Quer usar os plugins Via* em um proxy (BungeeCord, Velocity, ...)?";
-            document.getElementById("versions").innerHTML = "Selecione as versões para dar suporte";
-            document.getElementById("out_text").innerHTML = "Você precisa de";
-            document.getElementById("warn").innerHTML = "Selecione uma versão adicional!";
-            document.getElementById("note").innerHTML = "Tenha certeza de que os plugins Via* estão somente no proxy ou nos servidores backend (configuração recomendada)";
-            blockMessage = "Insira estes números na <code>config.yml</code> do ViaVersion em <code>block-versions: <b class='ctooltip'><span class='ctooltiptext'>Click to copy</span>[$output]</b></code>";//todo add translation
-            toggleMessage = ["Marcar tudo", "Desmarcar tudo"];
-            document.getElementById("velocity").innerHTML = "Você precisará do <a href='https://velocitypowered.com/' target='_blank' rel='noopener'>Velocity</a> como proxy para aceitar a versão 1.7";
+            document.getElementById("move").innerHTML = "A página ViaSetup foi transferida para a <a href=\"https://viaversion.com/setup.html\" title=\"ViaSetup\" style=\"color: black\">nossa nova página inicial</a>";
             document.getElementById("credits").innerHTML = "Feito com &hearts; por Jo0001";
         },
         "fr": () => {
-            document.getElementById("server_version_text").innerHTML = "Sélectionnez votre version de serveur";
-            document.getElementById("proxy_text").innerHTML = "Voulez-vous installer les plugins Via* sur un proxy (BungeeCord, Velocity, ...) ?";
-            document.getElementById("versions").innerHTML = "Cochez les versions que vous souhaitez supporter";
-            document.getElementById("out_text").innerHTML = "Vous avez besoin de";
-            document.getElementById("warn").innerHTML = "Veuillez cocher au moins une version supplémentaire !";
-            document.getElementById("note").innerHTML = "Assurez-vous d'installer Via* uniquement sur le <span class=\"ctooltip help\">proxy<span class=\"ctooltiptext\">BungeeCord, Velocity, ...</span></span> OU sur chacun de vos <span class=\"ctooltip help\">serveurs<span class=\"ctooltiptext\">Paper, Spigot, ...</span></span> (recommandé)";
-            blockMessage = "Collez ces nombres dans le fichier <code>config.yml</code> de ViaVersion à la ligne <code>block-versions: <b class='ctooltip'><span class='ctooltiptext'>Clique pour copier</span>[$output]</b></code>";
-            toggleMessage = ["Tout cocher", "Tout décocher"];
-            document.getElementById("velocity").innerHTML = "Vous avez besoin de <a href='https://velocitypowered.com/' target='_blank' rel='noopener'>Velocity</a> comme proxy pour autoriser la version 1.7";
+            document.getElementById("move").innerHTML = "La page ViaSetup a été déplacée vers <a href=\"https://viaversion.com/setup.html\" title=\"ViaSetup\" style=\"color: black\">notre nouvelle page d'accueil</a>";
             document.getElementById("credits").innerHTML = "Fait avec &hearts; par Jo0001";
         }
     };
-    let toggleMessage = ["Check all", "Uncheck all"];
-    let blockMessage = "Paste these numbers to the ViaVersion <code>config.yml</code> under <code>block-versions: <b class='ctooltip'><span class='ctooltiptext'>Click to copy</span>[$output]</b></code>";
 
     let langIds = Object.keys(langs);
     if (!langIds.includes(lang)) {
@@ -471,180 +158,8 @@
         url.searchParams.set("lang", lang);
         history.replaceState(null, null, url);
     }
-
     document.documentElement.lang = lang;
-
     langs[lang]();
-
-    document.getElementById("check").addEventListener('click', toggleCheck)
-
-    //Plugin generation
-    function getPlugins() {
-        let server_version = parseInt(document.getElementById("server_version").value);
-        let player_versions = Array.from(document.getElementsByTagName("input")).filter(it => {
-            if (it.value == server_version) it.checked = true;
-            return it.checked;
-        }).map(it => parseInt(it.value)).filter(function (item) {
-            return !isNaN(item);
-        });
-        if (player_versions.includes(server_version) && player_versions.length === 1) {
-            document.getElementById("output_container").style.display = "none";
-            document.getElementById("warn").style.display = "inline-block";
-            document.getElementById("tip").style.display = "none";
-            return;
-        } else {
-            document.getElementById("output_container").style.display = "inline-block";
-            document.getElementById("warn").style.display = "none";
-        }
-        let rewind = player_versions.some(it => it < server_version && it < 107);
-        let backwards = player_versions.some(it => (it < server_version));
-        let proxyType = document.getElementById("proxy").value;
-        let proxy = proxyType !== "none";
-        document.getElementById("out").innerHTML = " ViaVersion" + (backwards ? " + ViaBackwards" : "") + (rewind ? " + ViaRewind" : "") + (rewind && !proxy ? " (+ ViaRewind Legacy Support)" : "") + (proxyType === "bungeecord" ? " + ViaBungee" : "") + (proxyType === "sponge" ? " + ViaSponge" : "");
-        generateBlockList();
-        if (player_versions.includes(5) && proxy && proxyType !== "velocity") {
-            document.getElementById("velocity").style.display = "list-item";
-        } else {
-            document.getElementById("velocity").style.display = "none";
-        }
-
-        function generateBlockList() {
-            let blocked_versions = Array.from(document.getElementsByTagName("input")).filter(it => {
-                return it.checked === false;
-            }).map(it => parseInt(it.value)).filter(function (item) {
-                return !isNaN(item);
-            });
-            if (blocked_versions.length === 0) {
-                document.getElementById("tip").style.display = "none";
-                return;
-            }
-            let confString;
-
-            function convert(array) {
-                let range = [];
-                for (let i = 0; i < array.length; i++) {
-                    let version = versions.find((version) => version.protocol === array[i])
-                    if (i !== 0) {//skip check for the first entry
-                        let idx = versions.findIndex((version) => version.protocol === array[i]);
-                        let idxBefore = versions.findIndex((version) => version.protocol === array[i - 1]);
-                        if (idx - idxBefore > 1) {
-                            range.push("|");
-                        }
-                    }
-                    range.push(version.version);
-                }
-                return range;
-            }
-
-            let range = convert(blocked_versions);
-            let confArr = [];
-            let idx = range.indexOf("|");
-            if (idx !== -1) {
-                let lowerBound = range.slice(0, idx);
-                let upperBound = range.slice(range.lastIndexOf("|") + 1, range.length);
-
-                let middle = [];
-                if (count(range) > 1) {
-                    //remove upper & lower and the separator to get the middle elements
-                    middle = range.filter(function (el) {
-                        return !upperBound.includes(el);
-                    }).filter(function (el) {
-                        return !lowerBound.includes(el);
-                    }).filter(it => {
-                        return it !== "|";
-                    });
-                }
-
-                if (player_versions.includes(versions[0].protocol)) {
-                    confArr = confArr.concat(lowerBound);
-                } else {
-                    confArr.push("<" + lowerBound[idx - 1]);
-                }
-
-                confArr = confArr.concat(middle);
-
-                if (player_versions.includes(versions[versions.length - 1].protocol)) {
-                    confArr = confArr.concat(upperBound);
-                } else {
-                    let op = convertToProtocol(upperBound[0]) < server_version ? "<" : ">";
-                    confArr.push(op + upperBound[0]);
-                }
-
-
-            } else {//All unchecked checkboxes are one after the other without interruption (they can be at the end/start or in the middle
-                //check if only some versions in the middle should be blocked
-                if (player_versions.includes(versions[0].protocol) && player_versions.includes(versions.at(-1).protocol)) {
-                    confArr = confArr.concat(range);
-                } else {
-                    let upper = player_versions.at(-1) < convertToProtocol(range.at(-1));//all versions except the high/end ones are selected
-                    let op = upper ? ">" : "<";
-                    let version = upper ? convertToVersion(player_versions.at(-1)) : convertToVersion(player_versions[0]);
-                    confArr.push(op + version);
-                }
-            }
-
-            function convertToVersion(protocol) {
-                return versions.find(version => version.protocol === protocol).version;
-            }
-
-            function convertToProtocol(mcstring) {
-                return versions.find(version => version.version === mcstring).protocol;
-            }
-
-            function count(arr) {
-                return arr.filter(it => {
-                    return it === "|";
-                }).length;
-            }
-
-            confString = confArr.map(it =>
-                '"' + it + '"'
-            );
-
-            document.getElementById("tip").innerHTML = blockMessage.replaceAll("$output", confString);
-            document.getElementsByClassName("ctooltip")[0].addEventListener('click', function () {
-                copyToClipboard(confString)
-            });
-            document.getElementById("tip").style.display = "list-item";
-        }
-    }
-
-    let check = false;
-
-    function toggleCheck() {
-        check = !check;
-        setCheckText();
-        let player_versions = Array.from(document.getElementsByTagName("input"));
-        player_versions.shift();
-        player_versions.forEach(it => {
-            it.checked = check;
-        });
-        getPlugins();
-    }
-
-    function setCheckText() {
-        document.getElementById("check").innerHTML = check ? toggleMessage[1] : toggleMessage[0];
-    }
-
-    setCheckText();
-
-    //copy blocklist to clipboard
-    function copyToClipboard(blocked_versions) {
-        let tooltiptextElm = document.getElementsByClassName("ctooltiptext")[0];
-        navigator.clipboard.writeText("[" + blocked_versions + "]").then(function () {
-            tooltiptextElm.style.border = "5px solid green";
-            setTimeout(function () {
-                tooltiptextElm.style.border = "none";
-            }, 2500);
-        }, function (e) {
-            console.exception(e);
-            tooltiptextElm.style.border = "5px solid red";
-            setTimeout(function () {
-                tooltiptextElm.style.border = "none";
-            }, 2500);
-        })
-    }
-
 </script>
 <!-- Cloudflare Web Analytics -->
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
